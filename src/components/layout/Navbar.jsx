@@ -1,40 +1,550 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Search01Icon, ShoppingBag01Icon, UserIcon, FavouriteIcon, Menu01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
+import {
+  Search01Icon,
+  ShoppingBag01Icon,
+  UserIcon,
+  FavouriteIcon,
+  Menu01Icon,
+  Cancel01Icon,
+} from '@hugeicons/core-free-icons';
 import { AnimatePresence, motion } from 'framer-motion';
+
 import { useCart } from '../../context/CartContext.jsx';
 import { useWishlist } from '../../context/WishlistContext.jsx';
 import { useShop } from '../../context/ShopContext.jsx';
 import IconButton from '../common/IconButton.jsx';
 
-const links = [['/shop','Shop'], ['/drops','Drops'], ['/lookbook','Lookbook'], ['/community','Community'], ['/story','Our Story']];
+const links = [
+  ['/shop', 'Shop'],
+  ['/drops', 'Drops'],
+  ['/lookbook', 'Lookbook'],
+  ['/community', 'Community'],
+  ['/story', 'Our Story'],
+];
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.055,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const linkVariants = {
+  hidden: {
+    opacity: 0,
+    y: 16,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+
   const { cartCount, setDrawerOpen } = useCart();
   const { wishlistCount } = useWishlist();
   const { setSearchOpen } = useShop();
-  return <>
-    <header className="sticky top-0 z-50 border-b border-line bg-ink/90 backdrop-blur-xl">
-      <div className="site-container flex h-[74px] items-center justify-between">
-        <Link to="/" className="font-display text-2xl font-extrabold tracking-[-.06em]">ZENJI<span className="text-crimson">.</span></Link>
-        <nav className="hidden items-center gap-8 lg:flex">
-          {links.map(([to,label]) => <NavLink key={to} to={to} className={({isActive}) => `text-[12px] font-semibold uppercase tracking-[.12em] transition ${isActive ? 'text-crimson' : 'text-ivory/75 hover:text-ivory'}`}>{label}</NavLink>)}
-        </nav>
-        <div className="flex items-center gap-2">
-          <IconButton label="Search" onClick={() => setSearchOpen(true)}><HugeiconsIcon icon={Search01Icon} size={17}/></IconButton>
-          <Link to="/wishlist" className="relative hidden sm:block"><IconButton label="Wishlist"><HugeiconsIcon icon={FavouriteIcon} size={17}/></IconButton>{wishlistCount > 0 && <span className="absolute -right-1 -top-1 min-w-4 rounded-full bg-crimson px-1 text-center font-mono text-[9px] text-white">{wishlistCount}</span>}</Link>
-          <Link to="/account" className="hidden sm:block"><IconButton label="Account"><HugeiconsIcon icon={UserIcon} size={17}/></IconButton></Link>
-          <div className="relative"><IconButton label="Cart" onClick={() => setDrawerOpen(true)}><HugeiconsIcon icon={ShoppingBag01Icon} size={17}/></IconButton>{cartCount > 0 && <span className="absolute -right-1 -top-1 min-w-4 rounded-full bg-crimson px-1 text-center font-mono text-[9px] text-white">{cartCount}</span>}</div>
-          <IconButton label="Menu" className="lg:hidden" onClick={() => setMobileOpen(true)}><HugeiconsIcon icon={Menu01Icon} size={18}/></IconButton>
+
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+  };
+
+  return (
+    <>
+      {/* ==================================================
+          MAIN NAVBAR
+      ================================================== */}
+      <header className="sticky top-0 z-50 border-b border-line bg-ink/90 backdrop-blur-xl">
+        <div className="site-container flex h-[74px] items-center justify-between">
+          {/* Logo - ORIGINAL FONT */}
+          <Link
+            to="/"
+            className="font-display text-2xl font-extrabold tracking-[-.06em]"
+          >
+            ZENJI
+            <span className="text-crimson">.</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-8 lg:flex">
+            {links.map(([to, label]) => (
+              <NavLink
+                key={to}
+                to={to}
+                className={({ isActive }) =>
+                  `
+                    font-['Space_Grotesk']
+                    text-[12px]
+                    font-semibold
+                    uppercase
+                    tracking-[.12em]
+                    transition-colors
+                    duration-300
+                    ${
+                      isActive
+                        ? 'text-crimson'
+                        : 'text-ivory/75 hover:text-ivory'
+                    }
+                  `
+                }
+              >
+                {label}
+              </NavLink>
+            ))}
+          </nav>
+
+          {/* Actions */}
+          <div className="flex items-center gap-2">
+            <IconButton
+              label="Search"
+              onClick={() => setSearchOpen(true)}
+            >
+              <HugeiconsIcon icon={Search01Icon} size={17} />
+            </IconButton>
+
+            <Link
+              to="/wishlist"
+              className="relative hidden sm:block"
+            >
+              <IconButton label="Wishlist">
+                <HugeiconsIcon icon={FavouriteIcon} size={17} />
+              </IconButton>
+
+              {wishlistCount > 0 && (
+                <span className="absolute -right-1 -top-1 min-w-4 rounded-full bg-crimson px-1 text-center font-mono text-[9px] text-white">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+
+            <Link
+              to="/account"
+              className="hidden sm:block"
+            >
+              <IconButton label="Account">
+                <HugeiconsIcon icon={UserIcon} size={17} />
+              </IconButton>
+            </Link>
+
+            <div className="relative">
+              <IconButton
+                label="Cart"
+                onClick={() => setDrawerOpen(true)}
+              >
+                <HugeiconsIcon icon={ShoppingBag01Icon} size={17} />
+              </IconButton>
+
+              {cartCount > 0 && (
+                <span className="absolute -right-1 -top-1 min-w-4 rounded-full bg-crimson px-1 text-center font-mono text-[9px] text-white">
+                  {cartCount}
+                </span>
+              )}
+            </div>
+
+            <IconButton
+              label="Menu"
+              className="lg:hidden"
+              onClick={() => setMobileOpen(true)}
+            >
+              <HugeiconsIcon icon={Menu01Icon} size={18} />
+            </IconButton>
+          </div>
         </div>
-      </div>
-    </header>
-    <AnimatePresence>{mobileOpen && <motion.div className="fixed inset-0 z-[80] bg-ink p-5" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
-      <div className="flex items-center justify-between border-b border-line pb-5"><span className="font-display text-2xl font-bold">ZENJI.</span><IconButton label="Close menu" onClick={() => setMobileOpen(false)}><HugeiconsIcon icon={Cancel01Icon} size={18}/></IconButton></div>
-      <nav className="mt-12 flex flex-col">{links.map(([to,label], i) => <motion.div key={to} initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:.06*i}}><Link to={to} onClick={() => setMobileOpen(false)} className="block border-b border-line py-5 font-display text-5xl tracking-[-.05em]">{label}</Link></motion.div>)}</nav>
-      <div className="mt-8 grid grid-cols-2 gap-3"><Link to="/wishlist" onClick={()=>setMobileOpen(false)} className="rounded-2xl border border-line p-5 text-sm">Wishlist / {wishlistCount}</Link><Link to="/account" onClick={()=>setMobileOpen(false)} className="rounded-2xl border border-line p-5 text-sm">My account</Link></div>
-    </motion.div>}</AnimatePresence>
-  </>;
+      </header>
+
+      {/* ==================================================
+          MOBILE NAVIGATION
+      ================================================== */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            className="fixed inset-0 z-[80] overflow-y-auto bg-ink text-ivory"
+          >
+            <div className="mx-auto flex min-h-[100dvh] w-full max-w-[520px] flex-col px-5 pb-5 sm:px-7">
+              {/* ==================================================
+                  HEADER
+              ================================================== */}
+              <div className="flex h-[76px] shrink-0 items-center justify-between border-b border-line">
+                {/* Logo - ORIGINAL FONT */}
+                <Link
+                  to="/"
+                  onClick={closeMobileMenu}
+                  className="font-display text-[21px] font-extrabold tracking-[-.06em]"
+                >
+                  ZENJI
+                  <span className="text-crimson">.</span>
+                </Link>
+
+                <motion.button
+                  type="button"
+                  aria-label="Close navigation"
+                  onClick={closeMobileMenu}
+                  whileTap={{ scale: 0.9 }}
+                  className="
+                    flex h-10 w-10
+                    items-center justify-center
+                    rounded-full
+                    border border-line
+                    text-ivory/65
+                    transition-all duration-300
+                    hover:border-ivory/30
+                    hover:bg-white/[0.04]
+                    hover:text-ivory
+                  "
+                >
+                  <HugeiconsIcon
+                    icon={Cancel01Icon}
+                    size={18}
+                    strokeWidth={1.6}
+                  />
+                </motion.button>
+              </div>
+
+              {/* ==================================================
+                  NAVIGATION
+              ================================================== */}
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="flex-1 pt-7"
+              >
+                {/* Original utility font */}
+                <motion.div
+                  variants={linkVariants}
+                  className="mb-2 flex items-center justify-between"
+                >
+                  <span className="font-mono text-[9px] font-medium uppercase tracking-[0.22em] text-ivory/30">
+                    Explore
+                  </span>
+
+                  <span className="h-px w-9 bg-line" />
+                </motion.div>
+
+                <nav>
+                  {links.map(([to, label], index) => (
+                    <motion.div
+                      key={to}
+                      variants={linkVariants}
+                    >
+                      <NavLink
+                        to={to}
+                        onClick={closeMobileMenu}
+                        className={({ isActive }) =>
+                          `
+                            group
+                            relative
+                            flex
+                            min-h-[64px]
+                            items-center
+                            border-b
+                            border-line
+                            transition-colors
+                            duration-300
+                            ${
+                              isActive
+                                ? 'text-ivory'
+                                : 'text-ivory/72 hover:text-ivory'
+                            }
+                          `
+                        }
+                      >
+                        {({ isActive }) => (
+                          <>
+                            {/* Active crimson line */}
+                            <span
+                              className={`
+                                absolute
+                                left-0
+                                top-1/2
+                                h-6
+                                w-[2px]
+                                -translate-y-1/2
+                                bg-crimson
+                                transition-all
+                                duration-300
+                                ${
+                                  isActive
+                                    ? 'scale-y-100 opacity-100'
+                                    : 'scale-y-0 opacity-0'
+                                }
+                              `}
+                            />
+
+                            {/* Number - ORIGINAL FONT */}
+                            <span
+                              className={`
+                                w-[38px]
+                                shrink-0
+                                font-mono
+                                text-[9px]
+                                tracking-[0.08em]
+                                transition-colors
+                                duration-300
+                                ${
+                                  isActive
+                                    ? 'text-crimson'
+                                    : 'text-ivory/22 group-hover:text-crimson/70'
+                                }
+                              `}
+                            >
+                              {String(index + 1).padStart(2, '0')}
+                            </span>
+
+                            {/* NAV ITEM ONLY - SPACE GROTESK */}
+                            <span
+                              className="
+                                font-['Space_Grotesk']
+                                text-[28px]
+                                font-medium
+                                leading-[1]
+                                tracking-[-0.045em]
+                                transition-transform
+                                duration-300
+                                group-hover:translate-x-1
+
+                                min-[390px]:text-[30px]
+                                sm:text-[32px]
+                              "
+                            >
+                              {label}
+                            </span>
+
+                            {/* Active dot */}
+                            <span
+                              className={`
+                                ml-auto
+                                h-[5px]
+                                w-[5px]
+                                rounded-full
+                                bg-crimson
+                                transition-all
+                                duration-300
+                                ${
+                                  isActive
+                                    ? 'scale-100 opacity-100'
+                                    : 'scale-0 opacity-0'
+                                }
+                              `}
+                            />
+                          </>
+                        )}
+                      </NavLink>
+                    </motion.div>
+                  ))}
+                </nav>
+              </motion.div>
+
+              {/* ==================================================
+                  QUICK ACCESS
+              ================================================== */}
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: 14,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  delay: 0.32,
+                  duration: 0.4,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="mt-6"
+              >
+                {/* Original font */}
+                <div className="mb-3">
+                  <span className="font-mono text-[9px] font-medium uppercase tracking-[0.2em] text-ivory/30">
+                    Quick Access
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2.5">
+                  {/* ==============================================
+                      WISHLIST
+                  ============================================== */}
+                  <Link
+                    to="/wishlist"
+                    onClick={closeMobileMenu}
+                    className="
+                      group
+                      relative
+                      flex
+                      min-h-[76px]
+                      items-center
+                      gap-3
+                      overflow-hidden
+                      rounded-[15px]
+                      border
+                      border-line
+                      bg-white/[0.015]
+                      px-3.5
+                      transition-all
+                      duration-300
+                      hover:border-ivory/20
+                      hover:bg-white/[0.035]
+                    "
+                  >
+                    <div
+                      className="
+                        flex
+                        h-9
+                        w-9
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        border
+                        border-line
+                        text-ivory/60
+                        transition-all
+                        duration-300
+                        group-hover:border-crimson/40
+                        group-hover:text-crimson
+                      "
+                    >
+                      <HugeiconsIcon
+                        icon={FavouriteIcon}
+                        size={17}
+                        strokeWidth={1.7}
+                      />
+                    </div>
+
+                    <div className="min-w-0">
+                      {/* Original font */}
+                      <p className="text-[12px] font-semibold text-ivory">
+                        Wishlist
+                      </p>
+
+                      <p className="mt-0.5 font-mono text-[9px] text-ivory/30">
+                        {wishlistCount}{' '}
+                        {wishlistCount === 1 ? 'item' : 'items'}
+                      </p>
+                    </div>
+
+                    {wishlistCount > 0 && (
+                      <span
+                        className="
+                          absolute
+                          right-2.5
+                          top-2.5
+                          flex
+                          h-[18px]
+                          min-w-[18px]
+                          items-center
+                          justify-center
+                          rounded-full
+                          bg-crimson
+                          px-1
+                          font-mono
+                          text-[8px]
+                          font-semibold
+                          text-white
+                        "
+                      >
+                        {wishlistCount}
+                      </span>
+                    )}
+                  </Link>
+
+                  {/* ==============================================
+                      ACCOUNT
+                  ============================================== */}
+                  <Link
+                    to="/account"
+                    onClick={closeMobileMenu}
+                    className="
+                      group
+                      flex
+                      min-h-[76px]
+                      items-center
+                      gap-3
+                      rounded-[15px]
+                      border
+                      border-line
+                      bg-white/[0.015]
+                      px-3.5
+                      transition-all
+                      duration-300
+                      hover:border-ivory/20
+                      hover:bg-white/[0.035]
+                    "
+                  >
+                    <div
+                      className="
+                        flex
+                        h-9
+                        w-9
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        border
+                        border-line
+                        text-ivory/60
+                        transition-all
+                        duration-300
+                        group-hover:border-crimson/40
+                        group-hover:text-crimson
+                      "
+                    >
+                      <HugeiconsIcon
+                        icon={UserIcon}
+                        size={17}
+                        strokeWidth={1.7}
+                      />
+                    </div>
+
+                    <div className="min-w-0">
+                      {/* Original font */}
+                      <p className="whitespace-nowrap text-[12px] font-semibold text-ivory">
+                        My Account
+                      </p>
+
+                      <p className="mt-0.5 font-mono text-[9px] text-ivory/30">
+                        Profile
+                      </p>
+                    </div>
+                  </Link>
+                </div>
+
+                {/* ==================================================
+                    FOOTER
+                ================================================== */}
+                <div className="mt-5 flex items-center justify-between border-t border-line py-4">
+                  {/* Original font */}
+                  <span className="font-mono text-[8px] uppercase tracking-[0.17em] text-ivory/20">
+                    Japanese Culture / Streetwear
+                  </span>
+
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-1 w-1 rounded-full bg-ivory/20" />
+                    <span className="h-1 w-1 rounded-full bg-ivory/20" />
+                    <span className="h-1 w-1 rounded-full bg-crimson" />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
 }
