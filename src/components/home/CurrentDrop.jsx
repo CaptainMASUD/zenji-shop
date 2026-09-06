@@ -10,178 +10,122 @@ import {
 } from "framer-motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
+import { useCart } from "../../context/CartContext.jsx";
+import { products } from "../../data/products.js";
 
 const chapters = [
   {
-    slug: "limitless-oversized-tee",
+    slug: "sukuna-shibuya-acidwash-tee",
     anime: "JUJUTSU KAISEN",
-    character: "GOJO SATORU",
-    jp: "五条 悟",
-    impact: "LIMITLESS.",
-    eyebrow: "THE STRONGEST / INFINITY",
-    techniqueJp: "「無下限」",
-    technique: "INFINITY TECHNIQUE",
-    impactLine: "NO ONE TOUCHES WHAT THEY CAN NEVER REACH.",
-    statement: "THE SPACE BETWEEN YOU AND IMPACT BELONGS TO HIM.",
-    phases: ["PRESENCE", "INFINITY", "AFTERIMAGE"],
+    character: "RYOMEN SUKUNA",
+    jp: "両面 宿儺",
+    impact: "DISMANTLE.",
+    eyebrow: "SHIBUYA CROSSING / KING OF CURSES",
+    techniqueJp: "「伏魔御廚子」",
+    technique: "MALEVOLENT SHRINE",
+    impactLine: "AT THE SHIBUYA 109 CROSSING, HE REWRITES THE STREETS.",
+    statement: "HEAVYWEIGHT MINERAL-WASHED COTTON HONORS THE DISASTER CURSE.",
+    phases: ["MINERAL WASH", "CURSED SEAL", "DESTRUCTION"],
     story: [
-      "Presence changes the room before anything happens.",
-      "Infinity turns distance itself into control.",
-      "By the time the frame settles, the outcome already feels decided.",
+      "Custom 260 GSM acid-washed mineral cotton gives each piece a distinct, weathered texture.",
+      "Blood-crimson cursed domain seals screenprinted across the back shoulder blade.",
+      "Heavy drop-shoulder silhouette cut for late-night Tokyo street presence.",
     ],
-    product: "Limitless Oversized Tee",
-    fit: "240 GSM / OVERSIZED FIT",
-    color: "WASHED BLACK",
+    product: "Sukuna Acid-Wash Shibuya Tee",
+    fit: "260 GSM / ACID-WASH OVERSIZED",
+    color: "MINERAL GREY",
     mainImage:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788545713/ChatGPT_Image_Sep_5_2026_12_05_11_AM_x9or1z.png",
+      "/t-shirt/Jujutsu Kaisen/JJK-TS-002-sukuna-acidwash-shibuya.png",
     altImage:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788545713/ChatGPT_Image_Sep_5_2026_12_11_42_AM_uhjlqf.png",
+      "/t-shirt/Jujutsu Kaisen/JJK-TS-003-sukuna-lookbook-grid.png",
     composition: "right",
     backgroundPosition: "center 42%",
     framePosition: "center 38%",
   },
   {
-    slug: "shadow-monarch-oversized-tee",
-    anime: "SOLO LEVELING",
-    character: "SUNG JIN-WOO",
-    jp: "影の君主",
-    impact: "ARISE.",
-    eyebrow: "SHADOW MONARCH / ASCENSION",
-    techniqueJp: "「影の君主」",
-    technique: "SHADOW SOVEREIGN",
-    impactLine: "ONE COMMAND, AND THE FALLEN STAND BEHIND HIM.",
-    statement: "HE DOESN'T ENTER THE BATTLEFIELD ALONE ANYMORE.",
-    phases: ["AWAKENING", "COMMAND", "MONARCH"],
-    story: [
-      "Every gate leaves less of the hunter who entered.",
-      "One command turns defeat into an army.",
-      "The shadows stop following the fight and start following him.",
-    ],
-    product: "Shadow Monarch Oversized Tee",
-    fit: "240 GSM / OVERSIZED FIT",
-    color: "WASHED BLACK",
-    mainImage:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788545713/ChatGPT_Image_Sep_5_2026_12_04_41_AM_yqo1s5.png",
-    altImage:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788545713/ChatGPT_Image_Sep_5_2026_12_05_02_AM_h8aqok.png",
-    composition: "left",
-    backgroundPosition: "center 44%",
-    framePosition: "center 40%",
-  },
-
-  {
-    slug: "demon-slayer-oversized-tee",
+    slug: "blue-flame-oversized-tee",
     anime: "DEMON SLAYER",
-    character: "TANJIRO KAMADO",
-    jp: "竈門 炭治郎",
-    impact: "BREATHE.",
-    eyebrow: "SUN BREATHING / RESOLVE",
-    techniqueJp: "「ヒノカミ神楽」",
-    technique: "HINOKAMI KAGURA",
-    impactLine: "EVERY STEP FORWARD IS CARRIED BY DISCIPLINE.",
-    statement: "A QUIETER KIND OF STRENGTH, BUILT TO KEEP MOVING.",
-    phases: ["FOCUS", "FLAME", "RESOLVE"],
+    character: "KYOJURO RENGOKU",
+    jp: "煉獄 杏寿郎",
+    impact: "SET YOUR HEART ABLAZE.",
+    eyebrow: "FLAME HASHIRA / NINTH FORM",
+    techniqueJp: "「心を燃やせ」",
+    technique: "PURGATORY FLAME",
+    impactLine: "STAND TALL AND SET YOUR HEART ABLAZE.",
+    statement: "A MONUMENTAL HEAVYWEIGHT TEE DEDICATED TO THE FLAME HASHIRA.",
+    phases: ["HEAT", "BLAZE", "PURGATORY"],
     story: [
-      "The frame starts calm, controlled and deliberate.",
-      "Heat rises through motion without losing restraint.",
-      "The final silhouette holds its ground without needing noise.",
+      "250 GSM combed cotton base with flame gradient calligraphy across the back.",
+      "Minimal chest flame insignia balanced with massive rear typographic print.",
+      "Pre-shrunk boxy cut designed for effortless Tokyo street layering.",
     ],
-    product: "Demon Slayer Oversized Tee",
-    fit: "240 GSM / OVERSIZED FIT",
+    product: "Flame Hashira Oversized Tee",
+    fit: "250 GSM / BOX FIT",
     color: "WASHED BLACK",
     mainImage:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788573284/ChatGPT_Image_Sep_5_2026_07_52_06_AM_sqylpj.png",
+      "/t-shirt/Demon Slayer/DS-TS-001-rengoku-flame-hashira.png",
     altImage:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788573284/ChatGPT_Image_Sep_5_2026_07_52_06_AM_sqylpj.png",
-    composition: "right",
+      "/t-shirt/Demon Slayer/DS-TS-002-squad-four-elements.png",
+    composition: "left",
     backgroundPosition: "center 43%",
     framePosition: "center 40%",
   },
   {
-    slug: "naruto-oversized-tee",
+    slug: "fourth-hokage-legacy-tee",
     anime: "NARUTO",
-    character: "NARUTO UZUMAKI",
-    jp: "うずまき ナルト",
-    impact: "ENDURE.",
-    eyebrow: "NINJA WAY / WILL",
-    techniqueJp: "「螺旋丸」",
-    technique: "RASENGAN",
-    impactLine: "THE ENERGY IS LOUD. THE DIRECTION IS ABSOLUTE.",
-    statement: "BUILT AROUND MOMENTUM, WILL AND THE REFUSAL TO STOP.",
-    phases: ["WILL", "MOTION", "ASCENT"],
+    character: "MINATO & NARUTO",
+    jp: "四代目 火影",
+    impact: "YELLOW FLASH.",
+    eyebrow: "WILL OF FIRE / HOKAGE LEGACY",
+    techniqueJp: "「飛雷神の術」",
+    technique: "FLYING THUNDER GOD",
+    impactLine: "FROM FATHER TO SON, THE WILL OF FIRE NEVER EXTINGUISHES.",
+    statement: "HONORING THE FOURTH HOKAGE STANDING TALL OVER THE HIDDEN LEAF.",
+    phases: ["FLASH", "HERITAGE", "FIRE"],
     story: [
-      "The chapter opens with raw forward momentum.",
-      "Movement tightens until every detail points in one direction.",
-      "What remains is persistence turned into identity.",
+      "Red Konoha crest embroidered cleanly at the left chest.",
+      "Monumental back portrait of Minato Namikaze protecting young Naruto.",
+      "250 GSM ringspun cotton with soft-touch crack-resistant ink.",
     ],
-    product: "Naruto Oversized Tee",
-    fit: "240 GSM / OVERSIZED FIT",
-    color: "WASHED BLACK",
+    product: "Fourth Hokage Legacy Oversized Tee",
+    fit: "250 GSM / RELAXED FIT",
+    color: "OBSIDIAN BLACK",
     mainImage:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788573283/ChatGPT_Image_Sep_5_2026_07_51_34_AM_e707zd.png",
+      "/t-shirt/Naruto/NAR-TS-001-naruto-minato-hokage.png",
     altImage:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788573283/ChatGPT_Image_Sep_5_2026_07_51_34_AM_e707zd.png",
-    composition: "left",
+      "/t-shirt/Naruto/NAR-TS-001-naruto-minato-hokage.png",
+    composition: "right",
     backgroundPosition: "center 42%",
     framePosition: "center 39%",
   },
   {
-    slug: "attack-on-titan-oversized-tee",
-    anime: "ATTACK ON TITAN",
-    character: "EREN YEAGER",
-    jp: "エレン・イェーガー",
-    impact: "ADVANCE.",
-    eyebrow: "TITAN / FREEDOM",
-    techniqueJp: "「進撃」",
-    technique: "ATTACK TITAN",
-    impactLine: "THE FRAME FEELS HEAVIER WHEN RETREAT IS NO LONGER AN OPTION.",
-    statement: "A CHAPTER BUILT AROUND SCALE, PRESSURE AND FORWARD MOTION.",
-    phases: ["PRESSURE", "BREAK", "ADVANCE"],
-    story: [
-      "Tension arrives before the silhouette fully settles.",
-      "The composition pushes against every visible boundary.",
-      "The final beat leaves only one direction: forward.",
-    ],
-    product: "Attack on Titan Oversized Tee",
-    fit: "240 GSM / OVERSIZED FIT",
-    color: "WASHED BLACK",
-    mainImage:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788573284/ChatGPT_Image_Sep_5_2026_07_51_44_AM_lv0lsa.png",
-    altImage:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788573284/ChatGPT_Image_Sep_5_2026_07_51_44_AM_lv0lsa.png",
-    composition: "right",
-    backgroundPosition: "center 44%",
-    framePosition: "center 41%",
-  },
-  {
-    slug: "one-piece-oversized-tee",
+    slug: "luffy-straw-hat-heavy-tee",
     anime: "ONE PIECE",
     character: "MONKEY D. LUFFY",
     jp: "モンキー・D・ルフィ",
-    impact: "FREEDOM.",
-    eyebrow: "STRAW HAT / DAWN",
-    techniqueJp: "「ギア5」",
-    technique: "GEAR FIVE",
+    impact: "KING OF THE PIRATES.",
+    eyebrow: "STRAW HAT CREW / NEW ERA",
+    techniqueJp: "「海賊王」",
+    technique: "STRAW HAT RESOLVE",
     impactLine: "THE HORIZON ONLY MATTERS IF YOU KEEP MOVING TOWARD IT.",
-    statement: "A CHAPTER BUILT AROUND FREEDOM, MOMENTUM AND THE NEXT HORIZON.",
-    phases: ["HORIZON", "FREEDOM", "DAWN"],
+    statement: "THE DEFINITIVE STRAW HAT STREETWEAR UNIFORM WITH MONUMENTAL BACK ART.",
+    phases: ["DAWN", "CREW", "FREEDOM"],
     story: [
-      "The frame opens with motion pointed toward the horizon.",
-      "Freedom becomes the loudest detail without overwhelming the silhouette.",
-      "The final beat feels less like an ending and more like the start of the next voyage.",
+      "Iconic visual of Luffy pulling down the Straw Hat rendered in high contrast.",
+      "Front minimal Japanese Katakana branding with expansive back composition.",
+      "250 GSM heavy jersey engineered to withstand daily city wear.",
     ],
-    product: "One Piece Oversized Tee",
-    fit: "240 GSM / OVERSIZED FIT",
-    color: "WASHED BLACK",
+    product: "Luffy Straw Hat Heavyweight Tee",
+    fit: "250 GSM / OVERSIZED FIT",
+    color: "VINTAGE BLACK",
     mainImage:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788685146/ChatGPT_Image_Sep_6_2026_02_58_55_PM_oefw3f.png",
+      "/t-shirt/One Piece/OP-TS-003-luffy-straw-hat.png",
     altImage:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788685146/ChatGPT_Image_Sep_6_2026_02_58_55_PM_oefw3f.png",
+      "/t-shirt/One Piece/OP-TS-001-luffy-manga-panels.png",
     composition: "left",
     backgroundPosition: "center 43%",
     framePosition: "center 40%",
   },
-
 ];
 
 const SIZES = ["S", "M", "L", "XL", "XXL"];
@@ -222,6 +166,7 @@ function ButtonHoverSweep({ direction = "ltr", tone = "crimson" }) {
 }
 
 function SizePicker({ chapter, alignRight = false, compact = false }) {
+  const { addToCart } = useCart();
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const [added, setAdded] = useState(false);
@@ -234,6 +179,25 @@ function SizePicker({ chapter, alignRight = false, compact = false }) {
     }, 1400);
     return () => window.clearTimeout(timer);
   }, [added]);
+
+  const matchedProduct = products.find((p) => p.slug === chapter.slug) || products[0];
+
+  const handleSelectSize = (size) => {
+    setSelected(size);
+    setAdded(true);
+    if (matchedProduct) {
+      addToCart({
+        id: matchedProduct.id,
+        slug: matchedProduct.slug,
+        name: matchedProduct.name,
+        price: matchedProduct.price,
+        size,
+        color: matchedProduct.colors?.[0] || chapter.color,
+        image: chapter.mainImage || matchedProduct.images?.[0],
+        quantity: 1,
+      });
+    }
+  };
 
   return (
     <div className={compact ? "relative w-full" : "relative"}>
@@ -255,10 +219,7 @@ function SizePicker({ chapter, alignRight = false, compact = false }) {
               <button
                 key={size}
                 type="button"
-                onClick={() => {
-                  setSelected(size);
-                  setAdded(true);
-                }}
+                onClick={() => handleSelectSize(size)}
                 className={`flex items-center justify-center border font-mono font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crimson ${
                   compact ? "h-10 min-w-0 text-[8px]" : "h-11 min-w-11 text-[9px]"
                 } ${
@@ -893,6 +854,7 @@ function ChapterCard({
 }) {
   const isRight = chapter.composition === "right";
   const alignRight = !isRight;
+  const compactImpactTitle = chapter.impact.length > 17;
 
   const backgroundScale = useTransform(artProgress, [0, 1], [1.04, 1.012]);
   const backgroundX = useTransform(artProgress, [0, 1], [isRight ? -8 : 8, 0]);
@@ -981,7 +943,7 @@ function ChapterCard({
         />
 
         <div
-          className={`absolute bottom-[8%] top-[9%] z-20 flex w-[54%] flex-col sm:bottom-[9%] sm:top-[10%] sm:w-[43%] md:w-[40%] ${
+          className={`absolute bottom-[8%] top-[9%] z-20 flex min-h-0 w-[54%] flex-col overflow-hidden sm:bottom-[9%] sm:top-[10%] sm:w-[43%] md:w-[40%] ${
             isRight
               ? "left-5 sm:left-[6%]"
               : "right-5 text-right sm:right-[6%]"
@@ -998,14 +960,20 @@ function ChapterCard({
             style={contentIsStatic ? undefined : { opacity: titleOpacity, y: titleY }}
             className="[will-change:transform,opacity]"
           >
-            <h3 className="display-tight mt-4 text-[clamp(2.55rem,5.7vw,5.85rem)] font-semibold uppercase leading-[0.76] tracking-[-0.072em] text-[#F4F0E8] sm:mt-5">
+            <h3
+              className={`display-tight mt-4 font-semibold uppercase tracking-[-0.072em] text-[#F4F0E8] sm:mt-5 ${
+                compactImpactTitle
+                  ? "text-[clamp(2.15rem,4.7vw,4.8rem)] leading-[0.79]"
+                  : "text-[clamp(2.55rem,5.7vw,5.85rem)] leading-[0.76]"
+              }`}
+            >
               {chapter.impact}
             </h3>
           </motion.div>
 
           <motion.div
             style={contentIsStatic ? undefined : { opacity: copyOpacity, y: copyY }}
-            className="relative mt-4 [will-change:transform,opacity] sm:mt-5"
+            className="relative mt-4 min-h-0 flex-1 overflow-hidden [will-change:transform,opacity] sm:mt-5"
           >
             <span
               aria-hidden="true"
@@ -1049,7 +1017,7 @@ function ChapterCard({
 
           <motion.div
             style={contentIsStatic ? undefined : { opacity: actionOpacity, y: actionY }}
-            className="mt-auto [will-change:transform,opacity]"
+            className="mt-auto shrink-0 [will-change:transform,opacity]"
           >
             <ContentActions
               chapter={chapter}
@@ -1080,72 +1048,186 @@ function StackedChapter({
   reduceMotion,
 }) {
   const isFirst = index === 0;
+  const isLast = index === total - 1;
   const segment = 1 / Math.max(total - 1, 1);
 
-  const enterStart = isFirst ? 0 : Math.max(0, (index - 1) * segment);
-  const enterEnd = isFirst ? segment * 0.22 : Math.min(1, index * segment);
-  const nextStart = Math.min(1, index * segment);
-  const nextEnd = Math.min(1, (index + 1) * segment);
+  /*
+   * RESTORED ORIGINAL STACK CHOREOGRAPHY
+   * ------------------------------------
+   * The first Latest Drop version was built around one deliberate handoff:
+   * content first -> artwork second -> next chapter rises last.
+   *
+   * For multiple cards we repeat that exact two-card timing inside each
+   * chapter segment instead of using the newer generic stack interpolation.
+   */
 
-  const y = useTransform(
+  const enterStart = isFirst ? 0 : (index - 1) * segment;
+  const enterEnd = isFirst ? segment : index * segment;
+
+  const enterLocal = useTransform(
     progress,
-    isFirst ? [0, 1] : [enterStart, enterEnd],
-    isFirst ? [0, 0] : ["calc(100% - 34px)", "0%"],
+    isFirst ? [0, segment] : [enterStart, enterEnd],
+    [0, 1],
   );
 
-  const scale = useTransform(
+  const enterHandoffRaw = useTransform(
+    enterLocal,
+    [0.22, 0.94],
+    [0, 1],
+  );
+  const enterHandoff = useTransform(enterHandoffRaw, smootherStep);
+
+  // Keep unopened future chapters completely below the stack.
+  // Only the chapter whose segment is starting reveals the 34px teaser edge.
+  const enterY = useTransform(
+    enterLocal,
+    [0, 0.14, 0.22, 0.94],
+    ["100%", "100%", "calc(100% - 34px)", "0%"],
+  );
+  const enterScale = useTransform(
+    enterHandoff,
+    [0, 0.6, 1],
+    [0.992, 0.997, 1],
+  );
+  const enterOpacity = useTransform(
+    enterHandoff,
+    [0, 0.18, 1],
+    [0.95, 1, 1],
+  );
+
+  /*
+   * Once a chapter is established, the next segment uses the original
+   * outgoing-card motion: a tiny lift, a restrained scale-down and only
+   * a slight opacity loss. This keeps the "stack" visible without making
+   * the current campaign feel like it is shrinking away.
+   */
+  const exitStart = index * segment;
+  const exitEnd = Math.min(1, (index + 1) * segment);
+
+  const exitLocal = useTransform(
     progress,
-    index === total - 1
-      ? [0, 1]
-      : [nextStart, Math.max(nextStart + 0.0001, nextEnd)],
-    index === total - 1 ? [1, 1] : [1, 0.982],
+    isLast ? [0, 1] : [exitStart, Math.max(exitStart + 0.0001, exitEnd)],
+    isLast ? [0, 0] : [0, 1],
   );
 
-  const opacity = useTransform(
-    progress,
-    index === total - 1
-      ? [0, 1]
-      : [nextStart, Math.max(nextStart + 0.0001, nextEnd)],
-    index === total - 1 ? [1, 1] : [1, 0.9],
+  const exitHandoffRaw = useTransform(
+    exitLocal,
+    [0.22, 0.94],
+    [0, 1],
+  );
+  const exitHandoff = useTransform(exitHandoffRaw, smootherStep);
+
+  const exitScale = useTransform(
+    exitHandoff,
+    [0, 0.58, 1],
+    [1, 0.995, 0.982],
+  );
+  const exitY = useTransform(
+    exitHandoff,
+    [0, 0.6, 1],
+    [0, -3, -9],
+  );
+  const exitOpacity = useTransform(
+    exitHandoff,
+    [0, 0.72, 1],
+    [1, 1, 0.9],
   );
 
-  const contentStart = isFirst ? 0 : enterStart + segment * 0.08;
-  const contentEnd = isFirst
-    ? Math.min(1, segment * 0.34)
-    : Math.min(1, enterStart + segment * 0.48);
-
-  const artStart = isFirst
-    ? Math.min(1, segment * 0.1)
-    : Math.min(1, enterStart + segment * 0.28);
-  const artEnd = isFirst
-    ? Math.min(1, segment * 0.72)
-    : Math.min(1, enterStart + segment * 0.86);
-
-  const storyStart = isFirst
-    ? Math.min(1, segment * 0.18)
-    : Math.min(1, enterStart + segment * 0.38);
-  const storyEnd = Math.min(
-    1,
-    isFirst ? segment * 0.94 : enterEnd + segment * 0.18,
+  /*
+   * ORIGINAL CONTENT / ART / STORY ORDER
+   * First card gets the exact first-card wake-up values.
+   * Every following card gets the exact old second-card values,
+   * normalized to its own transition segment.
+   */
+  const contentRaw = useTransform(
+    enterLocal,
+    isFirst ? [0, 0.08] : [0.23, 0.47],
+    [0, 1],
   );
 
-  const contentRaw = useTransform(progress, [contentStart, contentEnd], [0, 1]);
-  const artRaw = useTransform(progress, [artStart, artEnd], [0, 1]);
-  const storyRaw = useTransform(progress, [storyStart, storyEnd], [0, 1]);
+  const artRaw = useTransform(
+    enterLocal,
+    isFirst ? [0.06, 0.34] : [0.36, 0.7],
+    [0, 1],
+  );
+
+  const storyRaw = useTransform(
+    enterLocal,
+    isFirst ? [0.15, 0.6] : [0.5, 0.99],
+    [0, 1],
+  );
 
   const contentProgress = useTransform(contentRaw, smootherStep);
   const artProgress = useTransform(artRaw, smootherStep);
   const storyProgress = useTransform(storyRaw, smootherStep);
 
   const cardStyle = reduceMotion
-    ? { zIndex: 10 + index, y: 0 }
+    ? {
+        zIndex: 10 + index,
+        y: 0,
+        scale: 1,
+        opacity: 1,
+      }
     : {
         zIndex: 10 + index,
-        y,
-        scale,
-        opacity,
+        y: isFirst ? exitY : enterY,
+        scale: isFirst ? exitScale : isLast ? enterScale : enterScale,
+        opacity: isFirst ? exitOpacity : enterOpacity,
         transformOrigin: isFirst ? "50% 18%" : "50% 100%",
       };
+
+  /*
+   * For middle chapters we need both halves of the old transition:
+   * first they rise in, then they gently recede while the following card
+   * takes over. Motion values are composed into a single transform so the
+   * original visual rhythm survives across an arbitrary number of chapters.
+   */
+  const middleY = useTransform(
+    [enterLocal, enterHandoff, exitHandoff],
+    ([local, entered, exiting]) => {
+      // Before this card's own handoff starts it is fully hidden below the frame.
+      if (local < 0.14) return "100%";
+
+      // Briefly expose only this next card's teaser edge.
+      if (local < 0.22) {
+        const teaserProgress = clamp01((local - 0.14) / 0.08);
+        return `calc(100% - ${34 * teaserProgress}px)`;
+      }
+
+      const enterPixels = (1 - entered) * 100;
+      const exitPixels = -9 * exiting;
+
+      if (entered < 0.999) {
+        return `calc(${enterPixels}% - ${34 * (1 - entered)}px)`;
+      }
+
+      return `${exitPixels}px`;
+    },
+  );
+
+  const middleScale = useTransform(
+    [enterHandoff, exitHandoff],
+    ([entered, exiting]) => {
+      const incoming = 0.992 + 0.008 * smootherStep(entered);
+      const outgoing = 1 - 0.018 * smootherStep(exiting);
+      return Math.min(incoming, outgoing);
+    },
+  );
+
+  const middleOpacity = useTransform(
+    [enterHandoff, exitHandoff],
+    ([entered, exiting]) => {
+      const incoming = 0.95 + 0.05 * smootherStep(Math.min(1, entered / 0.18));
+      const outgoing = 1 - 0.1 * smootherStep(exiting);
+      return Math.min(incoming, outgoing);
+    },
+  );
+
+  if (!reduceMotion && !isFirst && !isLast) {
+    cardStyle.y = middleY;
+    cardStyle.scale = middleScale;
+    cardStyle.opacity = middleOpacity;
+  }
 
   return (
     <ChapterCard
@@ -1192,8 +1274,10 @@ export default function LatestDrops() {
     restSpeed: 0.0004,
   });
 
-  const stackHeight = `${115 + chapters.length * 58}vh`;
-  const stackHeightDesktop = `${105 + chapters.length * 50}vh`;
+  // Preserve the scroll distance of the original two-card version:
+  // 165vh mobile and 150vh desktop when there are exactly two chapters.
+  const stackHeight = `${78 + Math.max(chapters.length - 1, 1) * 87}vh`;
+  const stackHeightDesktop = `${58 + Math.max(chapters.length - 1, 1) * 92}vh`;
 
   return (
     <section className="relative overflow-x-clip border-b border-line bg-[#050505] pb-14 pt-7 text-[#F4F0E8] md:pb-20 md:pt-9">

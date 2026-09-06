@@ -11,9 +11,9 @@ const CTA_CLIP =
   'polygon(0 0, calc(100% - 14px) 0, 100% 14px, calc(100% - 10px) 100%, 0 100%)';
 
 const DEFAULT_HERO_IMAGE =
-  'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1800&q=88';
+  '/t-shirt/Jujutsu Kaisen/JJK-TS-002-sukuna-acidwash-shibuya.png';
 const DEFAULT_DETAIL_IMAGE =
-  'https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=1200&q=88';
+  '/t-shirt/Demon Slayer/DS-TS-001-rengoku-flame-hashira.png';
 
 const REASONS = [
   {

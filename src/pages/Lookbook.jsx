@@ -34,11 +34,11 @@ export default function Lookbook() {
         </div>
         <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
           {items.map((item, idx) => {
-            const p = products.find((x) => x.id === item.productId);
+            const p = products.find((x) => x.id === item.productId) || products[0];
             return (
               <Link
                 key={item.id}
-                to={`/product/${p.slug}`}
+                to={p ? `/product/${p.slug}` : '/shop'}
                 className="group relative mb-4 block break-inside-avoid overflow-hidden rounded-[24px]"
               >
                 <img
@@ -49,7 +49,7 @@ export default function Lookbook() {
                 <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/30" />
                 <div className="absolute inset-x-0 bottom-0 flex translate-y-full justify-between bg-black/75 p-5 font-mono text-[9px] uppercase tracking-[.12em] transition duration-300 group-hover:translate-y-0">
                   <span>{item.title}</span>
-                  <span>{p.name} ↗</span>
+                  <span>{p?.name || item.title} ↗</span>
                 </div>
               </Link>
             );

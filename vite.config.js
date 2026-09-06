@@ -6,9 +6,22 @@ export default defineConfig({
   server: {
     host: true,
     port: 5173,
+    cors: true,
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0',
+    },
+    hmr: {
+      overlay: true,
+    },
     watch: {
       usePolling: true,
       interval: 100,
+      awaitWriteFinish: {
+        stabilityThreshold: 100,
+        pollInterval: 50,
+      },
     },
   },
 });

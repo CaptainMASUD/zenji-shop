@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import ProductGrid from "../components/product/ProductGrid.jsx";
 import ShopToolbar from "../components/shop/ShopToolbar.jsx";
@@ -41,12 +42,29 @@ const slideVariants = {
 };
 
 export default function Shop() {
-  const { search, filters, setFilters, resetFilters, sort, setSort } =
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlSearch = searchParams.get("search") || searchParams.get("anime") || searchParams.get("q") || "";
+
+  const { search, setSearch, filters, setFilters, resetFilters, sort, setSort } =
     useShop();
 
   const [mobileFilters, setMobileFilters] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [direction, setDirection] = useState(1);
+
+  useEffect(() => {
+    if (urlSearch && urlSearch !== search) {
+      setSearch(urlSearch);
+    }
+  }, [urlSearch, search, setSearch]);
+
+  const handleReset = useCallback(() => {
+    resetFilters();
+    setSearch("");
+    if (urlSearch) {
+      setSearchParams({});
+    }
+  }, [resetFilters, setSearch, urlSearch, setSearchParams]);
 
   const filtered = useMemo(
     () => sortProducts(filterProducts(products, { ...filters, search }), sort),
@@ -270,13 +288,39 @@ export default function Shop() {
           onFilter={() => setMobileFilters(true)}
         />
 
+        {search && (
+          <div className="mb-6 flex flex-wrap items-center gap-3 border border-white/[0.09] bg-[#0A0A0A] px-4 py-2.5">
+            <span className="font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-white/45">
+              ACTIVE SIGNAL:
+            </span>
+            <span className="inline-flex items-center gap-2 border border-crimson bg-crimson/15 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.1em] text-crimson">
+              {search}
+              <button
+                type="button"
+                onClick={handleReset}
+                className="text-white/70 transition-colors hover:text-white"
+                aria-label="Clear active signal"
+              >
+                ✕
+              </button>
+            </span>
+            <button
+              type="button"
+              onClick={handleReset}
+              className="ml-auto font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-white/40 transition-colors hover:text-crimson"
+            >
+              CLEAR ALL
+            </button>
+          </div>
+        )}
+
         <div className="grid gap-8 lg:grid-cols-[250px_1fr] lg:gap-10">
           <aside className="hidden lg:block">
             <div className="sticky top-28">
               <FilterPanel
                 filters={filters}
                 setFilters={setFilters}
-                resetFilters={resetFilters}
+                resetFilters={handleReset}
               />
             </div>
           </aside>
@@ -293,7 +337,7 @@ export default function Shop() {
                   </p>
                   <button
                     type="button"
-                    onClick={resetFilters}
+                    onClick={handleReset}
                     className="mt-3 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-crimson transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crimson"
                   >
                     Reset filters
@@ -335,7 +379,7 @@ export default function Shop() {
               <FilterPanel
                 filters={filters}
                 setFilters={setFilters}
-                resetFilters={resetFilters}
+                resetFilters={handleReset}
                 onClose={() => setMobileFilters(false)}
               />
             </motion.aside>

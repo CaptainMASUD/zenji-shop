@@ -14,22 +14,11 @@ const animeWorlds = [
     title: "JUJUTSU KAISEN",
     short: "JJK",
     native: "呪術廻戦",
-    signal: "CURSED ENERGY / LIMITLESS",
+    signal: "CURSED ENERGY / SHIBUYA",
     line: "ENTER A WORLD WHERE POWER IS A CURSE BEFORE IT IS A GIFT.",
     image:
       "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788545713/ChatGPT_Image_Sep_5_2026_12_05_11_AM_x9or1z.png",
     objectPosition: "center 43%",
-  },
-  {
-    slug: "solo-leveling",
-    title: "SOLO LEVELING",
-    short: "ARISE",
-    native: "俺だけレベルアップな件",
-    signal: "SHADOWS / ASCENSION",
-    line: "FROM THE WEAKEST HUNTER TO THE ONE EVERY SHADOW ANSWERS TO.",
-    image:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788545713/ChatGPT_Image_Sep_5_2026_12_04_41_AM_yqo1s5.png",
-    objectPosition: "center 42%",
   },
   {
     slug: "demon-slayer",
@@ -52,17 +41,6 @@ const animeWorlds = [
     image:
       "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788573283/ChatGPT_Image_Sep_5_2026_07_51_34_AM_e707zd.png",
     objectPosition: "center 40%",
-  },
-  {
-    slug: "attack-on-titan",
-    title: "ATTACK ON TITAN",
-    short: "AOT",
-    native: "進撃の巨人",
-    signal: "WALLS / FREEDOM",
-    line: "KEEP MOVING FORWARD UNTIL THE WORLD BEYOND THE WALLS IS YOURS.",
-    image:
-      "https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788573284/ChatGPT_Image_Sep_5_2026_07_51_44_AM_lv0lsa.png",
-    objectPosition: "center 41%",
   },
   {
     slug: "one-piece",
@@ -118,8 +96,8 @@ function AnimeRailArrow({ direction, onClick, disabled = false, compact = false 
       <span
         aria-hidden="true"
         className={`pointer-events-none absolute inset-0 bg-crimson transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-          isLeft ? "translate-x-[102%]" : "-translate-x-[102%]"
-        } ${disabled ? "" : "group-hover:translate-x-0 group-focus-visible:translate-x-0"}`}
+          disabled ? "translate-x-0" : isLeft ? "translate-x-full group-hover:translate-x-0" : "-translate-x-full group-hover:translate-x-0"
+        }`}
       />
 
       <span
@@ -136,12 +114,8 @@ function AnimeRailArrow({ direction, onClick, disabled = false, compact = false 
       />
 
       <span
-        className={`relative z-10 inline-flex transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-          disabled
-            ? ""
-            : isLeft
-              ? "group-hover:-translate-x-1.5 group-focus-visible:-translate-x-1.5"
-              : "group-hover:translate-x-1.5 group-focus-visible:translate-x-1.5"
+        className={`relative z-10 inline-flex transition-transform duration-300 motion-reduce:transition-none ${
+          disabled ? "" : isLeft ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"
         }`}
       >
         <HugeiconsIcon
@@ -157,7 +131,7 @@ function AnimeRailArrow({ direction, onClick, disabled = false, compact = false 
 function ExploreButton({ world, compact = false }) {
   return (
     <Link
-      to={`/collections/${world.slug}`}
+      to={`/shop?search=${encodeURIComponent(world.title)}`}
       aria-label={`Explore ${world.title} collection`}
       className={`group relative inline-flex items-center justify-between overflow-hidden bg-[#F4F0E8] font-mono font-bold uppercase tracking-[0.16em] text-[#050505] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crimson focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505] ${
         compact

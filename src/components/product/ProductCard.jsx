@@ -18,7 +18,6 @@ const CTA_CLIP =
 export default function ProductCard({ product, priority = false }) {
   const { toggleWishlist, isWishlisted } = useWishlist();
 
-  // Keep hooks unconditional, then normalize product data before reading fields.
   const productId = product?.id ?? product?._id ?? product?.slug ?? null;
   const wished = productId ? Boolean(isWishlisted(productId)) : false;
 
@@ -27,6 +26,7 @@ export default function ProductCard({ product, priority = false }) {
   const images = Array.isArray(product.images)
     ? product.images.filter(Boolean)
     : [];
+
   const primaryImage = images[0] ?? null;
   const secondaryImage = images[1] ?? null;
 
@@ -46,11 +46,13 @@ export default function ProductCard({ product, priority = false }) {
 
   const productName = product.name || 'UNTITLED DROP';
   const collectionName = product.collection || 'ZENJI';
+
   const productPath = product.slug
     ? `/product/${product.slug}`
     : productId
       ? `/product/${productId}`
       : '#';
+
   const hasDestination = productPath !== '#';
 
   const wishlistProduct = product.id
@@ -211,7 +213,12 @@ export default function ProductCard({ product, priority = false }) {
               to={productPath}
               onClick={stopEmptyLink}
               aria-disabled={!hasDestination}
-              className="block min-h-[44px] line-clamp-2 font-display text-[1.25rem] font-semibold uppercase leading-[0.94] tracking-[-0.04em] text-[#F4F0E8] transition-colors duration-300 hover:text-crimson sm:text-[1.45rem]"
+              className="block h-[2.05rem] overflow-hidden font-display text-[1.05rem] font-semibold uppercase leading-[0.98] tracking-[-0.04em] text-[#F4F0E8] transition-colors duration-300 hover:text-crimson sm:h-[2.7rem] sm:text-[1.35rem]"
+              style={{
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 2,
+              }}
             >
               {productName}
             </Link>
@@ -220,12 +227,13 @@ export default function ProductCard({ product, priority = false }) {
           {(hasPrice || hasSale) && (
             <div className="shrink-0 pt-px text-right">
               {hasPrice && (
-                <p className="text-[17px] font-semibold leading-none tracking-[-0.03em] text-[#F4F0E8] sm:text-[19px]">
+                <p className="text-[15px] font-semibold leading-none tracking-[-0.03em] text-[#F4F0E8] sm:text-[19px]">
                   {currency(product.price)}
                 </p>
               )}
+
               {hasSale && (
-                <p className="mt-1.5 font-mono text-[10px] leading-none text-[#8B8B8B] line-through sm:text-[11px]">
+                <p className="mt-1.5 font-mono text-[9px] leading-none text-[#8B8B8B] line-through sm:text-[11px]">
                   {currency(product.compareAtPrice)}
                 </p>
               )}
@@ -235,7 +243,9 @@ export default function ProductCard({ product, priority = false }) {
 
         <div className="mt-2 flex min-h-4 items-center gap-1.5 font-mono text-[8px] font-semibold uppercase tracking-[0.11em] sm:text-[9px]">
           <span className="text-white/40">COLOR /</span>
-          <span className="truncate text-[#BEBEBE]">{colors || 'STANDARD'}</span>
+          <span className="truncate text-[#BEBEBE]">
+            {colors || 'STANDARD'}
+          </span>
         </div>
 
         <div className="mt-auto pt-3">
@@ -244,7 +254,7 @@ export default function ProductCard({ product, priority = false }) {
             onClick={stopEmptyLink}
             aria-label={`View ${productName}`}
             aria-disabled={!hasDestination}
-            className={`group/action flex min-h-[46px] w-full items-center justify-between border px-4 font-mono text-[9px] font-bold uppercase tracking-[0.13em] outline-none transition-[background-color,border-color,color] duration-300 sm:px-4.5 sm:text-[10px] ${
+            className={`group/action flex min-h-[46px] w-full items-center justify-between border px-3 font-mono text-[8px] font-bold uppercase tracking-[0.12em] outline-none transition-[background-color,border-color,color] duration-300 sm:px-4 sm:text-[10px] ${
               hasDestination
                 ? 'border-[#F4F0E8] bg-[#F4F0E8] text-[#050505] hover:border-crimson hover:bg-crimson hover:text-white focus-visible:ring-2 focus-visible:ring-crimson focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]'
                 : 'cursor-default border-white/[0.10] bg-[#0A0A0A] text-white/25'
@@ -252,6 +262,7 @@ export default function ProductCard({ product, priority = false }) {
             style={{ clipPath: CTA_CLIP }}
           >
             <span>VIEW PRODUCT</span>
+
             <span
               aria-hidden="true"
               className="inline-flex h-7 w-7 items-center justify-center text-[15px] transition-transform duration-300 group-hover/action:-translate-y-0.5 group-hover/action:translate-x-1"
