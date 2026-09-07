@@ -71,7 +71,6 @@ const chapters = [
     backgroundPosition: "center 43%",
     framePosition: "center 40%",
     mobilePosition: "center 40%",
-    mobilePosition: "center 40%",
   },
   {
     slug: "fourth-hokage-legacy-tee",
@@ -129,6 +128,7 @@ const chapters = [
     composition: "left",
     backgroundPosition: "center 43%",
     framePosition: "center 40%",
+    mobilePosition: "center 42%",
   },
 ];
 
@@ -276,42 +276,37 @@ function SizePicker({ chapter, alignRight = false, compact = false }) {
 function EpisodeIdentity({ chapter, alignRight = false }) {
   return (
     <div
-      className={`flex items-start gap-3 ${alignRight ? "justify-end text-right" : ""}`}
+      className={`flex items-center gap-3 ${alignRight ? "justify-end text-right" : ""}`}
     >
-      {!alignRight && <span className="mt-1 h-[3px] w-9 shrink-0 bg-crimson" />}
+      {!alignRight && <span className="h-[3px] w-9 shrink-0 bg-crimson" />}
 
-      <div className="min-w-0">
-        <p className="font-mono text-[6px] font-bold uppercase tracking-[0.24em] text-[#F4F0E8] sm:text-[7px]">
+      <div
+        className={`flex min-w-0 items-center gap-3 ${alignRight ? "flex-row-reverse" : ""}`}
+      >
+        <p className="font-mono text-[7px] font-bold uppercase tracking-[0.22em] text-[#F4F0E8] sm:text-[8px]">
           {chapter.anime}
         </p>
-        <div
-          className={`mt-1 flex items-center gap-2.5 ${alignRight ? "justify-end" : ""}`}
-        >
-          <span className="font-mono text-[7px] font-semibold uppercase tracking-[0.16em] text-[#9D9A93] sm:text-[8px]">
-            {chapter.character}
-          </span>
-          <span className="h-3 w-px bg-white/20" />
-          <span className="text-[12px] font-semibold leading-none text-[#F4F0E8]/70 sm:text-[13px]">
-            {chapter.jp}
-          </span>
-        </div>
+        <span className="h-3 w-px shrink-0 bg-white/15" />
+        <span className="shrink-0 text-[12px] font-semibold leading-none text-[#F4F0E8]/65 sm:text-[13px]">
+          {chapter.jp}
+        </span>
       </div>
 
-      {alignRight && <span className="mt-1 h-[3px] w-9 shrink-0 bg-crimson" />}
+      {alignRight && <span className="h-[3px] w-9 shrink-0 bg-crimson" />}
     </div>
   );
 }
 
-function StoryLine({ text, label, index, progress, range, alignRight = false }) {
+function StoryLine({ text, progress, range, alignRight = false }) {
   const [start, enter, hold, exit] = range;
   const opacity = useTransform(progress, [start, enter, hold, exit], [0, 1, 1, 0]);
-  const y = useTransform(progress, [start, enter, hold, exit], [12, 0, 0, -9]);
+  const y = useTransform(progress, [start, enter, hold, exit], [10, 0, 0, -7]);
   const x = useTransform(
     progress,
     [start, enter, hold, exit],
-    [alignRight ? -8 : 8, 0, 0, alignRight ? 6 : -6]
+    [alignRight ? -6 : 6, 0, 0, alignRight ? 5 : -5]
   );
-  const railScale = useTransform(progress, [start, enter, hold], [0.08, 0.5, 1]);
+  const railScale = useTransform(progress, [start, enter, hold], [0.08, 0.55, 1]);
 
   return (
     <motion.div
@@ -320,21 +315,7 @@ function StoryLine({ text, label, index, progress, range, alignRight = false }) 
         alignRight ? "items-end text-right" : "items-start"
       }`}
     >
-      <div
-        className={`flex items-center gap-2.5 ${alignRight ? "flex-row-reverse" : ""}`}
-      >
-        <span className="font-mono text-[8px] font-bold tracking-[0.08em] text-[#F4F0E8]">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <span className="font-mono text-[6px] font-bold uppercase tracking-[0.23em] text-crimson sm:text-[7px]">
-          {label}
-        </span>
-        <span className="font-mono text-[5px] uppercase tracking-[0.2em] text-white/30">
-          SCENE BEAT
-        </span>
-      </div>
-
-      <div className={`mt-2 h-px w-full max-w-[310px] overflow-hidden bg-white/12 ${alignRight ? "ml-auto" : ""}`}>
+      <div className={`h-[2px] w-8 overflow-hidden bg-white/10 ${alignRight ? "ml-auto" : ""}`}>
         <motion.span
           aria-hidden="true"
           style={{ scaleX: railScale, transformOrigin: alignRight ? "right center" : "left center" }}
@@ -342,7 +323,7 @@ function StoryLine({ text, label, index, progress, range, alignRight = false }) 
         />
       </div>
 
-      <p className="mt-2.5 max-w-[360px] text-[11px] font-medium leading-[1.55] text-[#D8D3C9] sm:text-[12px]">
+      <p className="mt-3 max-w-[360px] text-[11px] font-medium leading-[1.55] text-[#D8D3C9] sm:text-[12px]">
         {text}
       </p>
     </motion.div>
@@ -365,19 +346,8 @@ function StoryFocus({
   if (reduceMotion || storyInitiallyVisible) {
     return (
       <div className={alignRight ? "text-right" : ""}>
-        <div
-          className={`flex items-center gap-2.5 ${alignRight ? "justify-end flex-row-reverse" : ""}`}
-        >
-          <span className="font-mono text-[8px] font-bold text-[#F4F0E8]">01</span>
-          <span className="font-mono text-[6px] font-bold uppercase tracking-[0.23em] text-crimson">
-            {chapter.phases[0]}
-          </span>
-          <span className="font-mono text-[5px] uppercase tracking-[0.2em] text-white/30">
-            SCENE BEAT
-          </span>
-        </div>
-        <div className={`mt-2 h-px w-full max-w-[310px] bg-crimson ${alignRight ? "ml-auto" : ""}`} />
-        <p className={`mt-2.5 max-w-[360px] text-[11px] font-medium leading-[1.55] text-[#D8D3C9] ${alignRight ? "ml-auto" : ""}`}>
+        <div className={`h-[2px] w-8 bg-crimson ${alignRight ? "ml-auto" : ""}`} />
+        <p className={`mt-3 max-w-[360px] text-[11px] font-medium leading-[1.55] text-[#D8D3C9] ${alignRight ? "ml-auto" : ""}`}>
           {chapter.story[0]}
         </p>
       </div>
@@ -385,13 +355,11 @@ function StoryFocus({
   }
 
   return (
-    <div className={`relative h-[82px] max-w-[390px] sm:h-[86px] ${alignRight ? "ml-auto" : ""}`}>
+    <div className={`relative h-[74px] max-w-[390px] sm:h-[80px] ${alignRight ? "ml-auto" : ""}`}>
       {chapter.story.map((text, index) => (
         <StoryLine
           key={text}
           text={text}
-          label={chapter.phases[index]}
-          index={index}
           progress={progress}
           range={ranges[index]}
           alignRight={alignRight}
@@ -533,28 +501,61 @@ function HeroFrame({
   );
 }
 
-function MobileStoryLine({ text, label, progress, range }) {
+function MobileStoryLine({
+  text,
+  progress,
+  range,
+  persist = false,
+  startsVisible = false,
+}) {
   const [start, enter, hold, exit] = range;
-  const opacity = useTransform(progress, [start, enter, hold, exit], [0, 1, 1, 0]);
-  const y = useTransform(progress, [start, enter, hold, exit], [7, 0, 0, -5]);
-  const lineScale = useTransform(progress, [start, enter, hold], [0.15, 0.65, 1]);
+
+  const opacity = useTransform(
+    progress,
+    persist
+      ? [start, enter]
+      : startsVisible
+        ? [start, hold, exit]
+        : [start, enter, hold, exit],
+    persist
+      ? [0, 1]
+      : startsVisible
+        ? [1, 1, 0]
+        : [0, 1, 1, 0],
+  );
+
+  const y = useTransform(
+    progress,
+    persist
+      ? [start, enter]
+      : startsVisible
+        ? [start, hold, exit]
+        : [start, enter, hold, exit],
+    persist
+      ? [5, 0]
+      : startsVisible
+        ? [0, 0, -4]
+        : [5, 0, 0, -4],
+  );
+
+  const lineScale = useTransform(
+    progress,
+    startsVisible ? [start, hold] : [start, enter],
+    startsVisible ? [1, 1] : [0.2, 1],
+  );
 
   return (
     <motion.div
       style={{ opacity, y }}
       className="absolute inset-0 [will-change:transform,opacity]"
     >
-      <div className="flex items-center gap-2.5">
-        <motion.span
-          aria-hidden="true"
-          style={{ scaleX: lineScale }}
-          className="h-[2px] w-7 origin-left bg-crimson"
-        />
-        <span className="font-mono text-[7px] font-bold uppercase tracking-[0.2em] text-crimson">
-          {label}
-        </span>
-      </div>
-      <p className="mt-1.5 max-w-[330px] text-[10px] font-medium leading-[1.45] text-[#CFCAC1] min-[390px]:text-[11px]">
+      <motion.span
+        aria-hidden="true"
+        style={{ scaleX: lineScale }}
+        className="block h-[2px] w-6 origin-left bg-crimson"
+      />
+
+      <p className="mt-2 max-w-[340px] text-[10.25px] font-medium leading-[1.45] text-[#CFCAC1] min-[390px]:text-[10.75px]">
         {text}
       </p>
     </motion.div>
@@ -567,24 +568,17 @@ function MobileStoryFocus({
   reduceMotion,
   storyInitiallyVisible = false,
 }) {
-  // Non-overlapping windows prevent two absolute story lines from ghosting
-  // over one another during the handoff.
   const ranges = [
     [0.0, 0.08, 0.27, 0.34],
     [0.34, 0.41, 0.6, 0.67],
     [0.67, 0.74, 0.93, 1.0],
   ];
 
-  if (reduceMotion || storyInitiallyVisible) {
+  if (reduceMotion) {
     return (
       <div>
-        <div className="flex items-center gap-2.5">
-          <span className="h-[2px] w-7 bg-crimson" />
-          <span className="font-mono text-[7px] font-bold uppercase tracking-[0.2em] text-crimson">
-            {chapter.phases[0]}
-          </span>
-        </div>
-        <p className="mt-1.5 max-w-[330px] text-[10px] font-medium leading-[1.45] text-[#CFCAC1] min-[390px]:text-[11px]">
+        <span className="block h-[2px] w-6 bg-crimson" />
+        <p className="mt-2 max-w-[340px] text-[10.25px] font-medium leading-[1.45] text-[#CFCAC1] min-[390px]:text-[10.75px]">
           {chapter.story[0]}
         </p>
       </div>
@@ -592,14 +586,15 @@ function MobileStoryFocus({
   }
 
   return (
-    <div className="relative h-[64px] max-w-[340px] max-[359px]:h-[70px]">
+    <div className="relative h-[52px] max-w-[350px] max-[359px]:h-[60px]">
       {chapter.story.map((text, index) => (
         <MobileStoryLine
           key={text}
           text={text}
-          label={chapter.phases[index]}
           progress={progress}
           range={ranges[index]}
+          startsVisible={storyInitiallyVisible && index === 0}
+          persist={index === chapter.story.length - 1}
         />
       ))}
     </div>
@@ -631,7 +626,6 @@ function MobileArtFrame({
     artInitiallyVisible ? [3, 0] : [10, 0],
   );
   const veilX = useTransform(artProgress, [0.02, 0.46], ["0%", "108%"]);
-  const overlayOpacity = useTransform(artProgress, [0.12, 0.34], [0, 1]);
 
   return (
     <button
@@ -649,7 +643,7 @@ function MobileArtFrame({
           : `${chapter.anime} artwork`
       }
       aria-pressed={hasAlt ? showAlt : undefined}
-      className="absolute inset-x-0 top-0 h-[45%] overflow-hidden bg-[#090909] text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-crimson disabled:cursor-default"
+      className="absolute inset-x-0 top-0 h-[44%] overflow-hidden bg-[#090909] text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-crimson disabled:cursor-default"
     >
       <motion.div
         className="absolute inset-0 [will-change:transform,opacity]"
@@ -699,38 +693,31 @@ function MobileArtFrame({
       <span className="pointer-events-none absolute left-0 top-0 z-30 h-full w-[4px] bg-crimson" />
       <span className="pointer-events-none absolute right-0 top-0 z-30 h-[4px] w-[22%] bg-[#F4F0E8]" />
 
-      {hasAlt && (
-        <motion.span
-          className="pointer-events-none absolute right-4 top-4 z-30 bg-[#050505]/90 px-2.5 py-2 font-mono text-[7px] font-bold uppercase tracking-[0.18em] text-[#F4F0E8]"
-          style={{
-            clipPath: MINI_CLIP,
-            ...(reduceMotion || artInitiallyVisible ? { opacity: 1 } : { opacity: overlayOpacity }),
-          }}
-        >
-          TAP / ALT
-        </motion.span>
-      )}
     </button>
   );
 }
 
 function MobileContentActions({ chapter, reduceMotion }) {
   return (
-    <div className="border-t border-white/[0.11] pt-2.5">
+    <div className="border-t border-white/[0.1] pt-3.5">
       <div className="min-w-0">
-        <p className="line-clamp-2 text-[10px] font-semibold uppercase leading-[1.25] tracking-[0.035em] text-[#F4F0E8] min-[390px]:text-[11px]">
+        <p className="line-clamp-2 text-[10.75px] font-semibold uppercase leading-[1.22] tracking-[0.015em] text-[#F4F0E8] min-[390px]:text-[11.25px]">
           {chapter.product}
         </p>
-        <p className="mt-1 font-mono text-[7px] font-semibold uppercase leading-[1.35] tracking-[0.14em] text-[#858585]">
-          {chapter.fit} / {chapter.color}
-        </p>
+
+        <div className="mt-1.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[6.5px] font-semibold uppercase tracking-[0.11em] text-[#77756F]">
+          <span>{chapter.fit}</span>
+          <span aria-hidden="true" className="h-2.5 w-px bg-white/15" />
+          <span>{chapter.color}</span>
+        </div>
       </div>
 
-      <div className="mt-2.5 grid grid-cols-2 gap-2">
+      <div className="mt-3 grid grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] gap-2">
         <SizePicker chapter={chapter} compact />
+
         <Link
           to={`/product/${chapter.slug}`}
-          className="group relative inline-flex min-h-12 w-full items-center justify-between gap-3 overflow-hidden bg-crimson px-3 py-3 font-mono text-[8px] font-bold uppercase tracking-[0.12em] text-white transition-colors duration-300 hover:text-[#050505] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F4F0E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
+          className="group relative inline-flex min-h-12 w-full items-center justify-between gap-3 overflow-hidden bg-crimson px-3.5 py-3 font-mono text-[8px] font-bold uppercase tracking-[0.12em] text-white transition-colors duration-300 hover:text-[#050505] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F4F0E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
           style={{ clipPath: MINI_CLIP }}
         >
           <ButtonHoverSweep direction="rtl" tone="ivory" />
@@ -759,6 +746,7 @@ function MobileChapterLayout({
   artInitiallyVisible = false,
   storyInitiallyVisible = false,
   priority = false,
+  isLast = false,
 }) {
   const contentIsStatic = reduceMotion || contentAlwaysVisible;
   const compactImpactTitle = chapter.impact.length > 17;
@@ -766,11 +754,11 @@ function MobileChapterLayout({
   const identityOpacity = useTransform(contentProgress, [0, 0.2], [0, 1]);
   const identityY = useTransform(contentProgress, [0, 0.2], [7, 0]);
   const titleOpacity = useTransform(contentProgress, [0.03, 0.3], [0, 1]);
-  const titleY = useTransform(contentProgress, [0.03, 0.3], [14, 0]);
-  const copyOpacity = useTransform(contentProgress, [0.11, 0.42], [0, 1]);
-  const copyY = useTransform(contentProgress, [0.11, 0.42], [8, 0]);
-  const actionOpacity = useTransform(contentProgress, [0.16, 0.5], [0, 1]);
-  const actionY = useTransform(contentProgress, [0.16, 0.5], [8, 0]);
+  const titleY = useTransform(contentProgress, [0.03, 0.3], [12, 0]);
+  const copyOpacity = useTransform(contentProgress, [0.1, 0.4], [0, 1]);
+  const copyY = useTransform(contentProgress, [0.1, 0.4], [7, 0]);
+  const actionOpacity = useTransform(contentProgress, [0.15, 0.48], [0, 1]);
+  const actionY = useTransform(contentProgress, [0.15, 0.48], [7, 0]);
 
   return (
     <div className="absolute inset-0 lg:hidden sm:landscape:hidden">
@@ -783,76 +771,64 @@ function MobileChapterLayout({
       />
 
       <div
-        className={`absolute inset-x-0 bottom-0 top-[45%] flex min-h-0 flex-col bg-[#070707] px-5 pb-4 ${
-          compactImpactTitle ? "pt-[5.2rem]" : "pt-[4.25rem]"
-        }`}
+        className={`absolute inset-x-0 bottom-0 top-[43%] min-h-0 bg-[#070707] px-5 ${
+          isLast ? "overflow-visible pb-6" : "overflow-hidden pb-3.5"
+        } ${compactImpactTitle ? "pt-[4.05rem]" : "pt-[3.45rem]"} max-[359px]:px-4`}
       >
         <motion.div
           style={contentIsStatic ? undefined : { opacity: identityOpacity, y: identityY }}
-          className="grid shrink-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-x-4 gap-y-2 [will-change:transform,opacity] max-[359px]:grid-cols-1"
+          className="[will-change:transform,opacity]"
         >
-          <div className="min-w-0">
-            <div className="flex items-center gap-2.5">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex min-w-0 items-center gap-2.5">
               <span className="h-[2px] w-6 shrink-0 bg-crimson" />
-              <p className="truncate font-mono text-[7px] font-bold uppercase tracking-[0.2em] text-[#F4F0E8]">
+              <p className="truncate font-mono text-[7px] font-bold uppercase tracking-[0.18em] text-[#F4F0E8]">
                 {chapter.anime}
               </p>
             </div>
-            <p className="mt-1.5 pl-[34px] font-mono text-[7px] font-semibold uppercase tracking-[0.14em] text-[#858585]">
-              {chapter.character}
-            </p>
-          </div>
 
-          <span className="shrink-0 justify-self-end text-right text-[12px] font-semibold leading-[1.15] text-[#F4F0E8]/60 max-[359px]:justify-self-start max-[359px]:pl-[34px] max-[359px]:text-left">
-            {chapter.jp}
-          </span>
+            <span className="shrink-0 text-right text-[10.5px] font-semibold leading-[1.1] tracking-[-0.015em] text-[#F4F0E8]/55 min-[390px]:text-[11.5px]">
+              {chapter.jp}
+            </span>
+          </div>
         </motion.div>
+
+        <motion.p
+          style={contentIsStatic ? undefined : { opacity: copyOpacity, y: copyY }}
+          className="mt-4 max-w-[350px] text-[10px] font-semibold uppercase leading-[1.32] tracking-[0.008em] text-[#F4F0E8] min-[390px]:text-[10.75px] [will-change:transform,opacity]"
+        >
+          {chapter.impactLine}
+        </motion.p>
 
         <motion.div
           style={contentIsStatic ? undefined : { opacity: copyOpacity, y: copyY }}
-          className="mt-2.5 min-h-0 flex-1 [will-change:transform,opacity]"
+          className="mt-3.5 [will-change:transform,opacity]"
         >
-          <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-            <span className="text-[13px] font-semibold leading-none text-crimson">
-              {chapter.techniqueJp}
-            </span>
-            <span className="font-mono text-[7px] font-bold uppercase tracking-[0.17em] text-[#B9B5AC]">
-              {chapter.technique}
-            </span>
-          </div>
-
-          <p className="mt-2 max-w-[350px] text-[10px] font-semibold uppercase leading-[1.25] tracking-[0.012em] text-[#F4F0E8] min-[390px]:text-[11px]">
-            {chapter.impactLine}
-          </p>
-
-          <div className="mt-2.5">
-            <MobileStoryFocus
-              chapter={chapter}
-              progress={storyProgress}
-              reduceMotion={reduceMotion}
-              storyInitiallyVisible={storyInitiallyVisible}
-            />
-          </div>
+          <MobileStoryFocus
+            chapter={chapter}
+            progress={storyProgress}
+            reduceMotion={reduceMotion}
+            storyInitiallyVisible={storyInitiallyVisible}
+          />
         </motion.div>
 
         <motion.div
-          style={contentIsStatic ? undefined : { opacity: actionOpacity, y: actionY }}
-          className="mt-auto shrink-0 pt-2 [will-change:transform,opacity]"
+          style={contentIsStatic || isLast ? undefined : { opacity: actionOpacity, y: actionY }}
+          className={`mt-4 [will-change:transform,opacity] ${isLast ? "relative z-20 pb-1" : ""}`}
         >
           <MobileContentActions chapter={chapter} reduceMotion={reduceMotion} />
         </motion.div>
       </div>
 
-      {/* MOBILE EPISODE TITLE — large, but length-aware and kept clear of Japanese metadata. */}
       <motion.div
         style={contentIsStatic ? undefined : { opacity: titleOpacity, y: titleY }}
-        className="pointer-events-none absolute left-5 right-5 top-[39.2%] z-30 [will-change:transform,opacity]"
+        className="pointer-events-none absolute left-5 right-7 top-[38.2%] z-30 [will-change:transform,opacity] max-[359px]:left-4"
       >
         <h3
-          className={`display-tight font-semibold uppercase text-[#F4F0E8] [text-shadow:0_8px_28px_#000] ${
+          className={`display-tight max-w-[350px] font-semibold uppercase text-[#F4F0E8] [text-shadow:0_8px_28px_#000] ${
             compactImpactTitle
-              ? "text-[clamp(2rem,10.4vw,3.35rem)] leading-[0.84] tracking-[-0.055em]"
-              : "text-[clamp(2.45rem,13vw,4rem)] leading-[0.78] tracking-[-0.068em]"
+              ? "text-[clamp(1.75rem,8.8vw,2.85rem)] leading-[0.92] tracking-[-0.045em]"
+              : "text-[clamp(2.12rem,11vw,3.4rem)] leading-[0.84] tracking-[-0.058em]"
           }`}
         >
           {chapter.impact}
@@ -930,6 +906,7 @@ function ChapterCard({
   artInitiallyVisible = false,
   storyInitiallyVisible = false,
   priority = false,
+  isLast = false,
 }) {
   const isRight = chapter.composition === "right";
   const alignRight = !isRight;
@@ -949,6 +926,7 @@ function ChapterCard({
   const actionY = useTransform(contentProgress, [0.18, 0.5], [8, 0]);
   const jpOpacity = useTransform(artProgress, [0.08, 0.55], [0, 0.12]);
   const panelOpacity = useTransform(contentProgress, [0, 0.36], [0.58, 0.8]);
+  const teaserOpacity = useTransform(contentProgress, [0, 0.22, 0.42], [1, 0.72, 0]);
 
   const contentIsStatic = reduceMotion || contentAlwaysVisible;
 
@@ -971,16 +949,20 @@ function ChapterCard({
         artInitiallyVisible={artInitiallyVisible}
         storyInitiallyVisible={storyInitiallyVisible}
         priority={priority}
+        isLast={isLast}
       />
 
       {teaser && (
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-40 flex h-[34px] items-center gap-3 border-b border-white/10 bg-[#080808]/95 px-4 lg:hidden sm:landscape:hidden">
+        <motion.div
+          style={{ opacity: teaserOpacity }}
+          className="pointer-events-none absolute inset-x-0 top-0 z-40 flex h-[34px] items-center gap-3 border-b border-white/10 bg-[#080808]/95 px-4 lg:hidden sm:landscape:hidden"
+        >
           {/* MOBILE NEXT-CHAPTER TEASER */}
           <span className="h-[2px] w-5 shrink-0 bg-crimson" />
           <span className="truncate font-mono text-[7px] font-semibold uppercase tracking-[0.18em] text-[#F4F0E8]">
             NEXT CHAPTER / {chapter.anime}
           </span>
-        </div>
+        </motion.div>
       )}
 
       {/* DESKTOP / WIDE-LANDSCAPE COMPOSITION */}
@@ -1070,36 +1052,16 @@ function ChapterCard({
             style={contentIsStatic ? undefined : { opacity: copyOpacity, y: copyY }}
             className="relative mt-4 min-h-0 flex-1 overflow-hidden [will-change:transform,opacity] sm:mt-5"
           >
-            <span
-              aria-hidden="true"
-              className={`pointer-events-none absolute -top-3 select-none text-[clamp(2.6rem,4.8vw,4.6rem)] font-black leading-none tracking-[-0.08em] text-white/[0.035] ${
-                alignRight ? "right-0" : "left-0"
-              }`}
-            >
-              {chapter.techniqueJp}
-            </span>
-
-            <div className={`relative z-10 ${alignRight ? "text-right" : ""}`}>
-              <div
-                className={`flex items-end gap-2.5 ${alignRight ? "justify-end" : ""}`}
-              >
-                <span className="text-[15px] font-semibold leading-none text-crimson sm:text-base">
-                  {chapter.techniqueJp}
-                </span>
-                <span className="font-mono text-[6px] font-bold uppercase tracking-[0.22em] text-[#B9B5AC] sm:text-[7px]">
-                  {chapter.technique}
-                </span>
-              </div>
-
+            <div className={alignRight ? "text-right" : ""}>
               <p
-                className={`mt-3 max-w-[390px] text-[13px] font-semibold uppercase leading-[1.25] tracking-[0.015em] text-[#F4F0E8] sm:text-[14px] ${
+                className={`max-w-[390px] text-[13px] font-semibold uppercase leading-[1.28] tracking-[0.012em] text-[#F4F0E8] sm:text-[14px] ${
                   alignRight ? "ml-auto" : ""
                 }`}
               >
                 {chapter.impactLine}
               </p>
 
-              <div className="mt-4 sm:mt-5">
+              <div className="mt-5 sm:mt-6">
                 <StoryFocus
                   chapter={chapter}
                   progress={storyProgress}
@@ -1178,6 +1140,15 @@ function StackedChapter({
   const enterY = useTransform(
     enterLocal,
     [0, 0.14, 0.22, 0.94],
+    ["100%", "100%", "calc(100% - 34px)", "0%"],
+  );
+
+  // The final chapter settles earlier than the regular incoming cards. This
+  // keeps its bottom commerce controls fully inside the sticky frame before
+  // the stack releases into the archive footer.
+  const lastEnterY = useTransform(
+    enterLocal,
+    [0, 0.14, 0.22, 0.82],
     ["100%", "100%", "calc(100% - 34px)", "0%"],
   );
   const enterScale = useTransform(
@@ -1266,9 +1237,9 @@ function StackedChapter({
       }
     : {
         zIndex: 10 + index,
-        y: isFirst ? exitY : enterY,
-        scale: isFirst ? exitScale : isLast ? enterScale : enterScale,
-        opacity: isFirst ? exitOpacity : enterOpacity,
+        y: isFirst ? exitY : isLast ? lastEnterY : enterY,
+        scale: isFirst ? exitScale : isLast ? 1 : enterScale,
+        opacity: isFirst ? exitOpacity : isLast ? 1 : enterOpacity,
         transformOrigin: isFirst ? "50% 18%" : "50% 100%",
       };
 
@@ -1338,6 +1309,7 @@ function StackedChapter({
       artInitiallyVisible={isFirst}
       storyInitiallyVisible={isFirst}
       priority={isFirst}
+      isLast={isLast}
     />
   );
 }
@@ -1359,10 +1331,19 @@ export default function LatestDrops() {
     restSpeed: 0.0004,
   });
 
-  // Preserve the scroll distance of the original two-card version:
-  // 165vh mobile and 150vh desktop when there are exactly two chapters.
-  const stackHeight = `${78 + Math.max(chapters.length - 1, 1) * 87}svh`;
-  const stackHeightDesktop = `${58 + Math.max(chapters.length - 1, 1) * 92}svh`;
+  // Keep the existing chapter-transition distance, then reserve a final dwell
+  // so the last card can be read before the sticky stack releases into the archive footer.
+  const FINAL_DWELL_SVH = 42;
+  const baseStackHeight = 78 + Math.max(chapters.length - 1, 1) * 87;
+  const baseStackHeightDesktop = 58 + Math.max(chapters.length - 1, 1) * 92;
+  const stackHeight = `${baseStackHeight + FINAL_DWELL_SVH}svh`;
+  const stackHeightDesktop = `${baseStackHeightDesktop + FINAL_DWELL_SVH}svh`;
+  const stackProgressEnd = baseStackHeight / (baseStackHeight + FINAL_DWELL_SVH);
+  const chapterProgress = useTransform(
+    smoothProgress,
+    [0, stackProgressEnd, 1],
+    [0, 1, 1],
+  );
 
   return (
     <section className="relative overflow-x-clip border-b border-line bg-[#050505] pb-14 pt-7 text-[#F4F0E8] md:pb-20 md:pt-9">
@@ -1408,6 +1389,7 @@ export default function LatestDrops() {
                 artInitiallyVisible
                 storyInitiallyVisible
                 priority={index === 0}
+                isLast={index === chapters.length - 1}
               />
             </div>
           ))}
@@ -1428,7 +1410,7 @@ export default function LatestDrops() {
                 chapter={chapter}
                 index={index}
                 total={chapters.length}
-                progress={smoothProgress}
+                progress={chapterProgress}
                 reduceMotion={reduceMotion}
               />
             ))}
@@ -1437,7 +1419,7 @@ export default function LatestDrops() {
       )}
 
       <div className="site-container">
-        <div className="mx-auto flex max-w-[1380px] items-center justify-between border-t border-[#252525] pt-5 md:w-[86vw]">
+        <div className="mx-auto mt-10 flex max-w-[1380px] items-center justify-between border-t border-[#252525] pt-6 md:mt-9 md:pt-5 md:w-[86vw]">
           <p className="font-mono text-[6px] uppercase tracking-[0.22em] text-[#696969]">
             {chapters.length} STORIES / ONE DROP
           </p>

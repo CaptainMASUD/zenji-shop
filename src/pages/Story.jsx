@@ -6,10 +6,13 @@ import {
 
 const EASE = [0.16, 1, 0.3, 1];
 
+const HERO_IMAGE =
+  'https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788784426/ChatGPT_Image_Sep_7_2026_06_33_12_PM_hkspp9.png';
+
 const PEOPLE_IMAGE =
-  'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1600&q=90';
+  'https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788784082/ChatGPT_Image_Sep_7_2026_06_27_56_PM_ygzvrl.png';
 const INFLUENCE_IMAGE =
-  'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1500&q=90';
+  'https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788683542/ChatGPT_Image_Sep_6_2026_02_31_57_PM_mln7v9.png';
 
 const AUDIENCE = [
   { word: 'DREAMERS', text: 'See more than what already exists.' },
@@ -79,39 +82,33 @@ export default function Story() {
 
   return (
     <main className="overflow-hidden bg-[#050505] text-[#F4F0E8]">
-      {/* INTRO / COMPACT BRAND OPENING */}
-      <section className="relative border-b border-white/[0.1] bg-[#050505]">
-        <motion.div
-          aria-hidden="true"
-          initial={reduceMotion ? false : { scaleX: 0 }}
-          animate={reduceMotion ? undefined : { scaleX: 1 }}
-          transition={{ duration: 0.95, ease: EASE }}
-          className="absolute left-0 top-0 h-[4px] w-[28%] origin-left bg-crimson sm:w-[18%]"
-        />
+      {/* INTRO / CLEAN BRAND BANNER */}
+      <section className="border-b border-white/[0.1] bg-[#050505]">
+        <motion.figure
+          initial={reduceMotion ? false : { opacity: 0 }}
+          animate={reduceMotion ? undefined : { opacity: 1 }}
+          transition={{ duration: 0.85, ease: EASE }}
+          className="relative w-full overflow-hidden bg-[#080808]"
+        >
+          <motion.img
+            src={HERO_IMAGE}
+            alt="ZENJI anime streetwear brand banner"
+            initial={reduceMotion ? false : { scale: 1.008 }}
+            animate={reduceMotion ? undefined : { scale: 1 }}
+            transition={{ duration: 1.05, ease: EASE }}
+            className="block h-auto w-full"
+          />
+        </motion.figure>
 
-        <div className="site-container py-9 sm:py-11 lg:py-14">
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.1] pb-5">
+        <div className="site-container">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.08] py-5 sm:py-6">
             <Label>ANIME STREETWEAR / AUSTRALIA</Label>
-            <div className="flex items-center gap-5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-white/38">
+
+            <div className="flex items-center gap-4 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-white/42 sm:gap-5 sm:text-[10px]">
               <span>EST. 2024</span>
+              <span className="h-3 w-px bg-white/14" />
               <span>AUSTRALIA</span>
             </div>
-          </div>
-
-          <div className="grid gap-8 pt-9 lg:grid-cols-[1.2fr_.8fr] lg:items-end lg:gap-14 lg:pt-12">
-            <Reveal>
-              <h1 className="max-w-[840px] font-display text-[clamp(2.7rem,5vw,4.75rem)] font-semibold uppercase leading-[0.9] tracking-[-0.055em]">
-                BORN FROM THE
-                <br />
-                <span className="text-crimson">WARRIOR SPIRIT.</span>
-              </h1>
-            </Reveal>
-
-            <Reveal className="lg:pb-1" delay={0.06}>
-              <p className="max-w-[610px] text-[16px] leading-7 text-white/66 sm:text-[17px] sm:leading-8">
-                ZENJI began with one belief: what you wear should tell a story.
-              </p>
-            </Reveal>
           </div>
         </div>
       </section>
@@ -178,14 +175,14 @@ export default function Story() {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-8 lg:grid-cols-[.82fr_1.18fr] lg:gap-12 xl:gap-16">
+          <div className="mt-8 grid gap-8 lg:grid-cols-[.72fr_1.28fr] lg:items-start lg:gap-12 xl:grid-cols-[.76fr_1.24fr] xl:gap-14">
             <div className="lg:sticky lg:top-24 lg:self-start">
               <motion.figure
                 initial={reduceMotion ? false : { clipPath: 'inset(0 0 14% 0)', opacity: 0.72 }}
                 whileInView={reduceMotion ? undefined : { clipPath: 'inset(0 0 0% 0)', opacity: 1 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.85, ease: EASE }}
-                className="relative h-[390px] overflow-hidden bg-[#111] sm:h-[470px] lg:h-[540px]"
+                className="relative h-[340px] overflow-hidden bg-[#111] sm:h-[390px] lg:h-[440px] xl:h-[460px]"
               >
                 <motion.img
                   src={PEOPLE_IMAGE}
@@ -246,14 +243,6 @@ export default function Story() {
                 </motion.div>
               ))}
 
-              <Reveal className="pt-7 sm:pt-9" delay={0.08}>
-                <div className="flex items-start gap-4 sm:items-center">
-                  <span className="mt-2 h-[4px] w-10 shrink-0 bg-crimson sm:mt-0" />
-                  <p className="max-w-[740px] font-display text-[clamp(1.45rem,2.5vw,2.45rem)] font-semibold uppercase leading-[1.02] tracking-[-0.04em]">
-                    DIFFERENT PATHS. SAME REFUSAL TO BLEND IN.
-                  </p>
-                </div>
-              </Reveal>
             </div>
           </div>
         </div>
@@ -298,56 +287,116 @@ export default function Story() {
       </section>
 
       {/* INFLUENCE / DESIGN LANGUAGE */}
-      <section className="relative overflow-hidden border-b border-white/[0.1] bg-[#080808] py-14 sm:py-16 lg:py-20">
-        <div className="site-container">
-          <div className="grid gap-8 lg:grid-cols-[.92fr_1.08fr] lg:gap-12">
-            <figure className="relative min-h-[360px] overflow-hidden bg-[#111] sm:min-h-[460px] lg:min-h-[520px]">
-              <img
+      <section className="relative overflow-hidden border-b border-white/[0.1] bg-[#070707] py-14 sm:py-16 lg:py-20">
+        <motion.div
+          aria-hidden="true"
+          initial={reduceMotion ? false : { opacity: 0, x: 60 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 1, ease: EASE }}
+          className="pointer-events-none absolute -right-6 top-2 hidden font-display text-[clamp(7rem,14vw,14rem)] font-semibold uppercase leading-none tracking-[-0.07em] text-white/[0.022] lg:block"
+        >
+          侍
+        </motion.div>
+
+        <div className="site-container relative z-10">
+          <div className="flex flex-wrap items-end justify-between gap-5 border-b border-white/[0.1] pb-5">
+            <Label>INFLUENCE / DESIGN LANGUAGE</Label>
+            <p className="font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-white/30 sm:text-[10px]">
+              VISUAL CODE / ZENJI
+            </p>
+          </div>
+
+          <div className="grid gap-8 pt-8 lg:grid-cols-[.9fr_1.1fr] lg:items-start lg:gap-10 xl:grid-cols-[.86fr_1.14fr] xl:gap-12">
+            <motion.figure
+              initial={
+                reduceMotion
+                  ? false
+                  : { opacity: 0, clipPath: 'inset(0 0 12% 0)' }
+              }
+              whileInView={
+                reduceMotion
+                  ? undefined
+                  : { opacity: 1, clipPath: 'inset(0 0 0% 0)' }
+              }
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.9, ease: EASE }}
+              className="relative min-h-[270px] overflow-hidden bg-[#111] sm:min-h-[330px] lg:min-h-[420px] xl:min-h-[450px]"
+              style={{
+                clipPath:
+                  'polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px))',
+              }}
+            >
+              <motion.img
                 src={INFLUENCE_IMAGE}
-                alt="Heavyweight streetwear detail"
+                alt="ZENJI anime-inspired streetwear campaign"
                 loading="lazy"
                 decoding="async"
+                initial={reduceMotion ? false : { scale: 1.045 }}
+                whileInView={reduceMotion ? undefined : { scale: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 1.25, ease: EASE }}
                 className="absolute inset-0 h-full w-full object-cover"
-                style={{ objectPosition: 'center 46%' }}
+                style={{ objectPosition: 'center center' }}
               />
-              <div className="absolute inset-0 bg-black/22" />
+
+              <div className="absolute inset-0 bg-black/10" />
+              <div className="absolute inset-y-0 right-0 w-px bg-white/20" />
+
               <motion.span
                 aria-hidden="true"
-                initial={reduceMotion ? false : { scaleX: 0 }}
-                whileInView={reduceMotion ? undefined : { scaleX: 1 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.85, ease: EASE }}
-                className="absolute bottom-0 left-0 h-[5px] w-[38%] origin-left bg-crimson"
+                initial={reduceMotion ? false : { scaleY: 0 }}
+                whileInView={reduceMotion ? undefined : { scaleY: 1 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ duration: 0.9, delay: 0.08, ease: EASE }}
+                className="absolute left-0 top-0 h-[34%] w-[4px] origin-top bg-crimson"
               />
-            </figure>
 
-            <div className="flex flex-col justify-between border-y border-white/[0.12] py-6 sm:py-8">
+              <div className="absolute left-4 top-4 border border-white/15 bg-[#050505]/82 px-3 py-2 backdrop-blur-sm sm:left-5 sm:top-5">
+                <p className="font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-white/48 sm:text-[9px]">
+                  FORM / SYMBOL / ATTITUDE
+                </p>
+              </div>
+
+              <div className="absolute inset-x-0 bottom-0 flex items-center justify-between border-t border-white/10 bg-[#050505]/88 px-4 py-3.5 sm:px-5">
+                <p className="font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-white/52 sm:text-[9px]">
+                  CAMPAIGN STUDY / JAPANESE STREET CULTURE
+                </p>
+                <p className="font-display text-sm font-semibold uppercase tracking-[-0.02em] text-crimson sm:text-base">
+                  侍
+                </p>
+              </div>
+            </motion.figure>
+
+            <div className="flex min-h-full flex-col justify-between border-y border-white/[0.12] py-6 sm:py-7 lg:py-6 xl:py-7">
               <div>
-                <Label>INFLUENCE / DESIGN LANGUAGE</Label>
-                <div className="mt-7 space-y-3">
+                <Reveal>
+                  <h2 className="max-w-[560px] font-display text-[clamp(2rem,3.5vw,3.7rem)] font-semibold uppercase leading-[0.9] tracking-[-0.055em]">
+                    DISCIPLINE IN FORM.
+                    <br />
+                    <span className="text-crimson">IMPACT IN DETAIL.</span>
+                  </h2>
+                </Reveal>
+
+                <div className="mt-7 border-t border-white/[0.11] sm:mt-8">
                   {INFLUENCES.map((item, index) => (
-                    <motion.p
+                    <motion.div
                       key={item}
-                      initial={reduceMotion ? false : { opacity: 0, x: 24 }}
+                      initial={reduceMotion ? false : { opacity: 0, x: 18 }}
                       whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
-                      viewport={{ once: true, amount: 0.7 }}
-                      transition={{ duration: 0.56, delay: index * 0.06, ease: EASE }}
-                      className="border-b border-white/[0.1] pb-3 font-display text-[clamp(1.5rem,2.8vw,2.8rem)] font-semibold uppercase leading-none tracking-[-0.04em]"
+                      viewport={{ once: true, amount: 0.72 }}
+                      transition={{ duration: 0.5, delay: index * 0.055, ease: EASE }}
+                      className="group relative overflow-hidden border-b border-white/[0.1] py-4 sm:py-5"
                     >
-                      {item}
-                    </motion.p>
+                      <span className="absolute left-0 top-0 h-full w-[2px] origin-top scale-y-0 bg-crimson transition-transform duration-300 group-hover:scale-y-100" />
+                      <p className="pl-0 font-display text-[clamp(1.25rem,2vw,2rem)] font-semibold uppercase leading-none tracking-[-0.035em] text-white/88 transition-all duration-300 group-hover:pl-4 group-hover:text-white">
+                        {item}
+                      </p>
+                    </motion.div>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-10 max-w-[720px] space-y-4 text-[15px] leading-7 text-white/62 sm:text-[16px]">
-                <p>
-                  ZENJI draws inspiration from Jujutsu Kaisen, Demon Slayer, Naruto, One Piece and Dragon Ball, alongside original samurai artwork.
-                </p>
-                <p className="text-white/48">
-                  Every design is ZENJI&apos;s own — no artwork is licensed from a studio.
-                </p>
-              </div>
             </div>
           </div>
         </div>

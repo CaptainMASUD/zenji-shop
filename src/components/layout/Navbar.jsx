@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
 import {
@@ -51,6 +51,7 @@ const linkVariants = {
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const { cartCount, setDrawerOpen } = useCart();
   const { wishlistCount } = useWishlist();
@@ -60,12 +61,36 @@ export default function Navbar() {
     setMobileOpen(false);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <>
       {/* ==================================================
           MAIN NAVBAR
       ================================================== */}
-      <header className="sticky top-0 z-50 border-b border-line bg-ink/90 backdrop-blur-xl">
+      <header
+        className={`
+          sticky top-0 z-50 border-b
+          transition-[background-color,border-color,box-shadow,backdrop-filter]
+          duration-300 ease-out
+          ${
+            isScrolled
+              ? 'border-line bg-ink/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)]'
+              : 'border-transparent bg-transparent backdrop-blur-none shadow-none'
+          }
+        `}
+      >
         <div className="site-container flex h-[74px] items-center justify-between">
           {/* Logo - ORIGINAL FONT */}
           <Link
@@ -77,24 +102,34 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-8 lg:flex">
+          <nav className="hidden items-center gap-7 lg:flex">
             {links.map(([to, label]) => (
               <NavLink
                 key={to}
                 to={to}
                 className={({ isActive }) =>
                   `
-                    font-['Space_Grotesk']
-                    text-[12px]
-                    font-semibold
+                    relative
+                    py-1.5
+                    font-mono
+                    text-[13px]
+                    font-bold
                     uppercase
-                    tracking-[.12em]
-                    transition-colors
+                    tracking-[0.14em]
+                    transition-all
                     duration-300
+                    after:absolute
+                    after:-bottom-0.5
+                    after:left-0
+                    after:h-px
+                    after:w-full
+                    after:origin-left
+                    after:transition-transform
+                    after:duration-300
                     ${
                       isActive
-                        ? 'text-crimson'
-                        : 'text-ivory/75 hover:text-ivory'
+                        ? 'text-crimson after:scale-x-100 after:bg-crimson'
+                        : 'text-ivory/70 after:scale-x-0 after:bg-ivory/50 hover:text-ivory hover:after:scale-x-100'
                     }
                   `
                 }
@@ -306,20 +341,22 @@ export default function Navbar() {
                               {String(index + 1).padStart(2, '0')}
                             </span>
 
-                            {/* NAV ITEM ONLY - SPACE GROTESK */}
+                            {/* NAV ITEM ONLY - SAME MONO STYLE AS TOP ANNOUNCEMENT BAR */}
                             <span
                               className="
-                                font-['Space_Grotesk']
-                                text-[28px]
-                                font-medium
-                                leading-[1]
-                                tracking-[-0.045em]
-                                transition-transform
+                                font-mono
+                                text-[22px]
+                                font-bold
+                                uppercase
+                                leading-[1.05]
+                                tracking-[0.075em]
+                                transition-all
                                 duration-300
                                 group-hover:translate-x-1
+                                group-hover:tracking-[0.095em]
 
-                                min-[390px]:text-[30px]
-                                sm:text-[32px]
+                                min-[390px]:text-[24px]
+                                sm:text-[26px]
                               "
                             >
                               {label}
