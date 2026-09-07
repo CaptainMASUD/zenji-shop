@@ -88,7 +88,7 @@ export default function Story() {
           initial={reduceMotion ? false : { opacity: 0 }}
           animate={reduceMotion ? undefined : { opacity: 1 }}
           transition={{ duration: 0.85, ease: EASE }}
-          className="relative w-full overflow-hidden bg-[#080808]"
+          className="relative h-[210px] w-full overflow-hidden bg-[#080808] sm:h-[250px] md:h-[300px] lg:h-[340px] xl:h-[370px] 2xl:h-[390px]"
         >
           <motion.img
             src={HERO_IMAGE}
@@ -96,7 +96,7 @@ export default function Story() {
             initial={reduceMotion ? false : { scale: 1.008 }}
             animate={reduceMotion ? undefined : { scale: 1 }}
             transition={{ duration: 1.05, ease: EASE }}
-            className="block h-auto w-full"
+            className="absolute inset-0 h-full w-full object-cover object-center"
           />
         </motion.figure>
 
