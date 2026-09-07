@@ -180,6 +180,26 @@ export default function Checkout() {
               </Button>
             )}
           </div>
+          {step === 4 && (
+            <p className="mt-4 text-center text-xs text-silver/60">
+              By placing your order, you agree to ZENJI's{" "}
+              <Link
+                to="/terms"
+                target="_blank"
+                className="text-silver underline hover:text-ivory"
+              >
+                Terms & Conditions
+              </Link>{" "}
+              and acknowledge our{" "}
+              <Link
+                to="/privacy"
+                target="_blank"
+                className="text-silver underline hover:text-ivory"
+              >
+                Privacy Policy
+              </Link>.
+            </p>
+          )}
         </div>
         <aside className="h-max rounded-[28px] border border-line bg-graphite p-6 lg:sticky lg:top-28">
           <p className="font-display text-3xl">Your order</p>

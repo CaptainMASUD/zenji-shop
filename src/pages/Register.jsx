@@ -63,7 +63,25 @@ export default function Register() {
         <Button type="submit" className="mt-8 w-full">
           Create account
         </Button>
-        <p className="mt-6 text-center text-xs text-silver">
+        <p className="mt-4 text-center text-[11px] text-silver/60">
+          By creating an account, you acknowledge our{" "}
+          <Link
+            to="/privacy"
+            target="_blank"
+            className="text-silver underline hover:text-ivory"
+          >
+            Privacy Policy
+          </Link>{" "}
+          and agree to the{" "}
+          <Link
+            to="/terms"
+            target="_blank"
+            className="text-silver underline hover:text-ivory"
+          >
+            Terms & Conditions
+          </Link>.
+        </p>
+        <p className="mt-5 text-center text-xs text-silver">
           Already registered?{" "}
           <Link to="/login" className="text-ivory underline underline-offset-4">
             Login

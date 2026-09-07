@@ -1135,12 +1135,13 @@ function StackedChapter({
   );
   const enterHandoff = useTransform(enterHandoffRaw, smootherStep);
 
-  // Keep unopened future chapters completely below the stack.
-  // Only the chapter whose segment is starting reveals the 34px teaser edge.
+  // Keep every future chapter fully below the sticky frame until its own
+  // handoff actually begins. No teaser strip is visible while the current
+  // chapter is resting.
   const enterY = useTransform(
     enterLocal,
-    [0, 0.14, 0.22, 0.94],
-    ["100%", "100%", "calc(100% - 34px)", "0%"],
+    [0, 0.22, 0.94],
+    ["100%", "100%", "0%"],
   );
 
   // The final chapter settles earlier than the regular incoming cards. This
@@ -1148,8 +1149,8 @@ function StackedChapter({
   // the stack releases into the archive footer.
   const lastEnterY = useTransform(
     enterLocal,
-    [0, 0.14, 0.22, 0.82],
-    ["100%", "100%", "calc(100% - 34px)", "0%"],
+    [0, 0.22, 0.82],
+    ["100%", "100%", "0%"],
   );
   const enterScale = useTransform(
     enterHandoff,
@@ -1252,20 +1253,16 @@ function StackedChapter({
   const middleY = useTransform(
     [enterLocal, enterHandoff, exitHandoff],
     ([local, entered, exiting]) => {
-      // Before this card's own handoff starts it is fully hidden below the frame.
-      if (local < 0.14) return "100%";
-
-      // Briefly expose only this next card's teaser edge.
-      if (local < 0.22) {
-        const teaserProgress = clamp01((local - 0.14) / 0.08);
-        return `calc(100% - ${34 * teaserProgress}px)`;
-      }
+      // Before this card's own handoff starts it remains completely below
+      // the sticky viewport. It only becomes visible once scrolling drives
+      // enterHandoff past its start point.
+      if (local <= 0.22) return "100%";
 
       const enterPixels = (1 - entered) * 100;
       const exitPixels = -9 * exiting;
 
       if (entered < 0.999) {
-        return `calc(${enterPixels}% - ${34 * (1 - entered)}px)`;
+        return `${enterPixels}%`;
       }
 
       return `${exitPixels}px`;
@@ -1403,7 +1400,7 @@ export default function LatestDrops() {
             "--stack-h-md": stackHeightDesktop,
           }}
         >
-          <div className="sticky top-[10svh] mx-auto h-[78svh] min-h-[540px] max-h-[700px] w-[calc(100%_-_1.25rem)] max-w-[1380px] sm:landscape:top-2 sm:landscape:h-[calc(100svh-1rem)] sm:landscape:min-h-0 sm:landscape:max-h-none lg:top-[17svh] lg:h-[58svh] lg:min-h-[500px] lg:max-h-[610px] lg:w-[86vw] lg:landscape:top-[17svh] lg:landscape:h-[58svh] lg:landscape:min-h-[500px] lg:landscape:max-h-[610px]">
+          <div className="sticky top-[10svh] mx-auto h-[78svh] min-h-[540px] max-h-[700px] w-[calc(100%_-_1.25rem)] max-w-[1380px] overflow-hidden sm:landscape:top-2 sm:landscape:h-[calc(100svh-1rem)] sm:landscape:min-h-0 sm:landscape:max-h-none lg:top-[17svh] lg:h-[58svh] lg:min-h-[500px] lg:max-h-[610px] lg:w-[86vw] lg:landscape:top-[17svh] lg:landscape:h-[58svh] lg:landscape:min-h-[500px] lg:landscape:max-h-[610px]">
             {chapters.map((chapter, index) => (
               <StackedChapter
                 key={chapter.slug}

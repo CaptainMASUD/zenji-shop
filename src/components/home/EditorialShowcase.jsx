@@ -4,108 +4,138 @@ import { motion, useReducedMotion } from 'framer-motion';
 const EASE = [0.16, 1, 0.3, 1];
 
 const HERO_CLIP =
-  'polygon(34px 0, 100% 0, 100% calc(100% - 42px), calc(100% - 42px) 100%, 0 100%, 0 34px)';
-const DETAIL_CLIP =
-  'polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 18px 100%, 0 calc(100% - 18px))';
-const CTA_CLIP =
-  'polygon(0 0, calc(100% - 14px) 0, 100% 14px, calc(100% - 10px) 100%, 0 100%)';
+  'polygon(26px 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%, 0 26px)';
+
+const IMAGE_CLIP =
+  'polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 16px 100%, 0 calc(100% - 16px))';
+
+const BUTTON_CLIP =
+  'polygon(0 0, calc(100% - 12px) 0, 100% 12px, calc(100% - 8px) 100%, 0 100%)';
+
+/* =========================================================
+   IMAGES
+========================================================= */
 
 const DEFAULT_HERO_IMAGE =
-  '/t-shirt/Jujutsu Kaisen/JJK-TS-002-sukuna-acidwash-shibuya.png';
+  'https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788802503/bn_fr7rie.png';
+
 const DEFAULT_DETAIL_IMAGE =
   '/t-shirt/Demon Slayer/DS-TS-001-rengoku-flame-hashira.png';
 
+/* =========================================================
+   CONTENT
+========================================================= */
+
 const REASONS = [
   {
-    eyebrow: 'WEIGHT / STRUCTURE',
-    title: 'Feels substantial. Falls cleaner.',
-    body:
-      'A more substantial fabric gives the tee a stronger drape and helps the oversized silhouette keep its shape instead of collapsing on-body.',
+    number: '01',
+    title: 'BETTER WEIGHT',
+    text: 'Structured fabric with a cleaner drape.',
   },
   {
-    eyebrow: 'FIT / PROPORTION',
-    title: 'Oversized by design—not by accident.',
-    body:
-      'Room through the body, a relaxed shoulder line and added sleeve volume create the intended streetwear proportion without making the tee feel shapeless.',
+    number: '02',
+    title: 'OVERSIZED FIT',
+    text: 'Relaxed proportions without feeling shapeless.',
   },
   {
-    eyebrow: 'FINISH / EVERYDAY WEAR',
-    title: 'Made to become the tee you reach for.',
-    body:
-      'The garment is designed around repeat wear, easy styling and straightforward care so the piece works beyond the first outfit or first photo.',
+    number: '03',
+    title: 'DAILY READY',
+    text: 'Made for repeat wear, styling and comfort.',
   },
 ];
 
 const TRUST_POINTS = [
-  'FIT EXPLAINED BEFORE CHECKOUT',
-  'CLEAR SIZE GUIDANCE',
-  'CARE GUIDANCE INCLUDED',
+  'OVERSIZED FIT',
+  'SIZE GUIDANCE',
+  'EASY CARE',
 ];
+
+/* =========================================================
+   ARROW
+========================================================= */
 
 function Arrow() {
   return (
     <span
       aria-hidden="true"
-      className="inline-flex text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5"
+      className="inline-flex text-[16px] leading-none transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5"
     >
       ↗
     </span>
   );
 }
 
-function ReasonRow({ reason, index, reduceMotion }) {
+/* =========================================================
+   QUALITY ITEM
+========================================================= */
+
+function QualityItem({ item, index, reduceMotion }) {
   return (
     <motion.article
       initial={reduceMotion ? false : { opacity: 0, y: 14 }}
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.65 }}
-      transition={{ duration: 0.48, delay: index * 0.06, ease: EASE }}
-      className="grid gap-3 border-t border-white/[0.11] py-5 sm:grid-cols-[180px_minmax(0,1fr)] sm:gap-7 sm:py-5"
+      viewport={{ once: true, amount: 0.6 }}
+      transition={{
+        duration: 0.45,
+        delay: index * 0.06,
+        ease: EASE,
+      }}
+      className="group grid grid-cols-[46px_minmax(0,1fr)] gap-4 border-t border-white/[0.09] py-5 sm:grid-cols-[58px_minmax(0,1fr)] sm:py-6"
     >
-      <div className="flex items-start gap-2.5 pt-0.5">
-        <span className="mt-[5px] h-[3px] w-7 shrink-0 bg-crimson" />
-        <p className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-white/62 sm:text-[11px]">
-          {reason.eyebrow}
-        </p>
+      {/* Number */}
+      <div className="pt-1">
+        <span className="font-mono text-[10px] font-bold tracking-[0.15em] text-crimson">
+          {item.number}
+        </span>
       </div>
 
-      <div className="min-w-0">
-        <h3 className="max-w-[600px] font-display text-[20px] font-semibold uppercase leading-[0.98] tracking-[-0.035em] text-[#F4F0E8] sm:text-[24px]">
-          {reason.title}
-        </h3>
-        <p className="mt-2.5 max-w-[690px] text-[14px] leading-6 text-white/68 sm:text-[15px] sm:leading-7">
-          {reason.body}
+      {/* Content */}
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+        <h4 className="font-display text-[20px] font-semibold uppercase leading-none tracking-[-0.03em] text-[#F4F0E8] sm:text-[23px]">
+          {item.title}
+        </h4>
+
+        <p className="max-w-[330px] text-[13px] leading-5 text-white/50 sm:text-right sm:text-[14px] sm:leading-6">
+          {item.text}
         </p>
       </div>
     </motion.article>
   );
 }
 
-function FitChoice({ title, body, active = false }) {
+/* =========================================================
+   FIT OPTION
+========================================================= */
+
+function FitOption({ label, caption, active = false }) {
   return (
-    <div className="min-w-0 text-center">
-      <div className="mx-auto flex h-5 items-center justify-center">
-        <span
-          className={`block ${
-            active
-              ? 'h-3.5 w-3.5 bg-crimson ring-4 ring-crimson/15'
-              : 'h-2.5 w-2.5 border border-white/40 bg-[#090909]'
-          }`}
-        />
-      </div>
+    <div className="relative flex flex-col items-center text-center">
+      <span
+        className={`relative z-10 block transition-all duration-300 ${
+          active
+            ? 'h-3.5 w-3.5 bg-crimson ring-[5px] ring-crimson/10'
+            : 'h-2.5 w-2.5 border border-white/30 bg-[#080808]'
+        }`}
+      />
+
       <p
-        className={`mt-2 font-mono text-[9px] font-bold uppercase tracking-[0.11em] sm:text-[10px] ${
-          active ? 'text-[#F4F0E8]' : 'text-white/55'
+        className={`mt-3 font-mono text-[9px] font-bold uppercase tracking-[0.12em] sm:text-[10px] ${
+          active ? 'text-[#F4F0E8]' : 'text-white/48'
         }`}
       >
-        {title}
+        {label}
       </p>
-      <p className="mx-auto mt-1 max-w-[150px] text-[12px] leading-5 text-white/46 sm:text-[13px]">
-        {body}
+
+      <p className="mt-1 text-[11px] text-white/34 sm:text-[12px]">
+        {caption}
       </p>
     </div>
   );
 }
+
+/* =========================================================
+   QUALITY + FIT
+========================================================= */
 
 export default function QualityFit({
   heroImage = DEFAULT_HERO_IMAGE,
@@ -118,206 +148,277 @@ export default function QualityFit({
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden border-y border-white/[0.10] bg-[#050505] py-14 text-[#F4F0E8] sm:py-18 lg:py-22">
-      <span className="pointer-events-none absolute left-0 top-0 h-[5px] w-[16%] bg-crimson" />
-      <span className="pointer-events-none absolute bottom-0 right-0 h-[5px] w-[12%] bg-[#F4F0E8]" />
+    <section className="relative overflow-hidden border-y border-white/[0.08] bg-[#050505] py-14 text-[#F4F0E8] sm:py-16 lg:py-20">
+      {/* Side accents */}
+      <span className="pointer-events-none absolute left-0 top-0 h-[4px] w-[12%] bg-crimson" />
+      <span className="pointer-events-none absolute bottom-0 right-0 h-[4px] w-[9%] bg-[#F4F0E8]" />
 
       <div className="site-container">
-        {/* HEADER */}
+        {/* =====================================================
+            SECTION HEADER
+        ===================================================== */}
+
         <div className="mb-6 sm:mb-8">
-          <div className="flex flex-col gap-3 border-b border-white/[0.10] pb-4 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+          <div className="flex items-center justify-between gap-6 border-b border-white/[0.08] pb-4">
             <div className="flex items-center gap-3">
-              <span className="h-[3px] w-9 bg-crimson" />
-              <p className="font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-white/62 sm:text-[10px]">
+              <span className="h-[2px] w-8 bg-crimson" />
+
+              <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-white/55 sm:text-[10px]">
                 QUALITY + FIT
               </p>
             </div>
 
-            <p className="max-w-[520px] text-[13px] leading-6 text-white/58 sm:text-right sm:text-[14px]">
-              Built around how the tee feels, falls and fits into real outfits—not just how it looks in one photo.
+            <p className="hidden font-mono text-[9px] uppercase tracking-[0.12em] text-white/30 sm:block">
+              BUILT TO WEAR
             </p>
           </div>
 
-          <motion.h2
+          <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            whileInView={
+              reduceMotion ? undefined : { opacity: 1, y: 0 }
+            }
             viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.58, ease: EASE }}
-            aria-label="QUALITY YOU FEEL. FIT YOU NOTICE."
-            className="mt-3 whitespace-nowrap font-display text-[clamp(1.05rem,5vw,4.7rem)] font-semibold uppercase leading-[0.88] tracking-[-0.055em] text-[#F4F0E8]"
+            transition={{
+              duration: 0.55,
+              ease: EASE,
+            }}
+            className="mt-4"
           >
-            QUALITY YOU FEEL. FIT YOU <span className="text-crimson">NOTICE.</span>
-          </motion.h2>
+            <h2 className="max-w-[1050px] font-display text-[clamp(2rem,5.3vw,4.8rem)] font-semibold uppercase leading-[0.88] tracking-[-0.055em]">
+              MADE TO FEEL
+              <span className="text-crimson"> RIGHT.</span>
+            </h2>
+          </motion.div>
         </div>
 
-        {/* HERO IMAGE */}
+        {/* =====================================================
+            THIN HERO BANNER
+        ===================================================== */}
+
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+          whileInView={
+            reduceMotion ? undefined : { opacity: 1, y: 0 }
+          }
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, ease: EASE }}
-          className="relative overflow-hidden border border-white/[0.11] bg-[#0A0A0A]"
+          transition={{
+            duration: 0.65,
+            ease: EASE,
+          }}
+          className="relative overflow-hidden border border-white/[0.09] bg-[#090909]"
           style={{ clipPath: HERO_CLIP }}
         >
-          <div className="relative aspect-[4/5] sm:aspect-[16/10] lg:aspect-[16/8.2]">
+          <div className="relative h-[220px] sm:h-[260px] lg:h-[300px]">
             <img
               src={heroImage}
-              alt="Model wearing an oversized streetwear tee"
+              alt="ZENJI streetwear fit"
               loading="lazy"
               decoding="async"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover object-center"
             />
 
-            <span className="pointer-events-none absolute left-0 top-0 h-[6px] w-[22%] bg-crimson" />
-            <span className="pointer-events-none absolute bottom-0 right-0 h-[6px] w-[18%] bg-[#F4F0E8]" />
+            {/* subtle readability */}
+            <div className="pointer-events-none absolute inset-0 bg-black/10" />
 
-            <div className="absolute inset-x-0 bottom-0 border-t border-white/[0.12] bg-[#050505] px-4 py-4 sm:px-6 sm:py-5 lg:flex lg:items-end lg:justify-between lg:gap-8 lg:px-8">
+            {/* Bottom strip */}
+            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 border-t border-white/[0.09] bg-[#050505]/95 px-4 py-3 backdrop-blur-md sm:px-6">
               <div>
-                <p className="font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-crimson sm:text-[10px]">
-                  REAL FIT / REAL PROPORTION
+                <p className="font-mono text-[8px] font-bold uppercase tracking-[0.16em] text-crimson sm:text-[9px]">
+                  ZENJI / FIT STANDARD
                 </p>
-                <p className="mt-2 max-w-[690px] font-display text-[24px] font-semibold uppercase leading-[0.95] tracking-[-0.035em] text-[#F4F0E8] sm:text-[30px] lg:text-[36px]">
-                  Designed to look intentional from every angle.
+
+                <p className="mt-1 font-display text-[17px] font-semibold uppercase tracking-[-0.02em] text-[#F4F0E8] sm:text-[20px]">
+                  BUILT FOR THE SILHOUETTE.
                 </p>
               </div>
 
               <Link
                 to={shopPath}
-                className="group mt-4 inline-flex min-h-[46px] items-center justify-between gap-7 bg-crimson px-5 font-mono text-[10px] font-bold uppercase tracking-[0.13em] text-white outline-none transition-colors hover:bg-[#F4F0E8] hover:text-[#050505] focus-visible:ring-2 focus-visible:ring-[#F4F0E8] lg:mt-0"
-                style={{ clipPath: CTA_CLIP }}
+                className="group hidden min-h-[40px] items-center gap-5 bg-crimson px-4 font-mono text-[9px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#F4F0E8] hover:text-[#050505] sm:inline-flex"
+                style={{ clipPath: BUTTON_CLIP }}
               >
-                SHOP THE DROP
+                SHOP
                 <Arrow />
               </Link>
             </div>
           </div>
         </motion.div>
 
-        {/* WHY IT FEELS BETTER */}
-        <div className="mt-7 grid gap-6 lg:mt-8 lg:grid-cols-[minmax(300px,.82fr)_minmax(0,1.18fr)] lg:gap-8">
+        {/* =====================================================
+            QUALITY DETAILS
+        ===================================================== */}
+
+        <div className="mt-6 grid gap-6 lg:mt-8 lg:grid-cols-[minmax(260px,0.68fr)_minmax(0,1.32fr)] lg:gap-7">
+          {/* =================================================
+              SMALLER IMAGE
+          ================================================= */}
+
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, x: -18 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.45 }}
-            transition={{ duration: 0.6, ease: EASE }}
-            className="relative overflow-hidden border border-white/[0.11] bg-[#090909]"
-            style={{ clipPath: DETAIL_CLIP }}
+            whileInView={
+              reduceMotion ? undefined : { opacity: 1, x: 0 }
+            }
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{
+              duration: 0.6,
+              ease: EASE,
+            }}
+            className="relative mx-auto w-full max-w-[460px] overflow-hidden border border-white/[0.09] bg-[#090909] lg:mx-0 lg:max-w-none"
+            style={{ clipPath: IMAGE_CLIP }}
           >
-            <div className="relative aspect-[5/6] min-h-[420px] lg:h-full lg:min-h-[610px]">
+            <div className="relative h-[390px] sm:h-[450px] lg:h-[470px] xl:h-[500px]">
               <img
                 src={detailImage}
-                alt="Close fashion detail showing the tee fit and fabric"
+                alt="ZENJI oversized streetwear detail"
                 loading="lazy"
                 decoding="async"
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover object-center"
               />
 
-              <div className="absolute bottom-0 left-0 max-w-[88%] bg-[#050505] px-4 py-4 sm:px-5">
-                <p className="font-mono text-[9px] font-bold uppercase tracking-[0.15em] text-white/52">
-                  THE DETAILS MATTER
+              {/* Bottom caption */}
+              <div className="absolute inset-x-0 bottom-0 border-t border-white/[0.08] bg-[#050505]/95 px-4 py-4 backdrop-blur-md sm:px-5">
+                <p className="font-mono text-[8px] font-bold uppercase tracking-[0.16em] text-white/42 sm:text-[9px]">
+                  ZENJI / DETAIL
                 </p>
-                <p className="mt-2 font-display text-[24px] font-semibold uppercase leading-[0.94] tracking-[-0.035em] text-[#F4F0E8] sm:text-[28px]">
-                  Better basics make better outfits.
+
+                <p className="mt-1.5 font-display text-[19px] font-semibold uppercase leading-none tracking-[-0.025em] sm:text-[22px]">
+                  CUT FOR STREETWEAR.
                 </p>
               </div>
             </div>
           </motion.div>
 
-          <div className="border border-white/[0.11] bg-[#080808] px-5 py-6 sm:px-7 sm:py-7 lg:px-8 lg:py-8">
-            <div className="flex flex-col gap-4 border-b border-white/[0.11] pb-5 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-crimson sm:text-[11px]">
-                  WHY THIS ONE FEELS BETTER
-                </p>
-                <h3 className="mt-2 max-w-[650px] font-display text-[clamp(1.85rem,3.7vw,3.15rem)] font-semibold uppercase leading-[0.88] tracking-[-0.045em]">
-                  GOOD FIT STARTS WITH GOOD PROPORTION.
-                </h3>
-              </div>
+          {/* =================================================
+              CLEAN INFORMATION PANEL
+          ================================================= */}
 
-              <p className="max-w-[310px] text-[14px] leading-6 text-white/54 sm:text-[15px]">
-                No mystery sizing language. No tiny spec dump. Just the information that helps you decide how this tee will actually sit on you.
+          <div className="flex flex-col border border-white/[0.09] bg-[#070707] px-5 py-6 sm:px-7 sm:py-7 lg:px-8">
+            {/* Title */}
+            <div className="border-b border-white/[0.09] pb-6">
+              <p className="font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-crimson sm:text-[10px]">
+                WHY IT WORKS
               </p>
+
+              <div className="mt-3 flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between xl:gap-10">
+                <h3 className="max-w-[620px] font-display text-[clamp(2rem,3.5vw,3.5rem)] font-semibold uppercase leading-[0.9] tracking-[-0.045em]">
+                  CLEAN FIT.
+                  <br />
+                  STRONG SHAPE.
+                </h3>
+
+                <p className="max-w-[320px] text-[13px] leading-6 text-white/48 sm:text-[14px]">
+                  A simple oversized silhouette designed for comfort,
+                  proportion and everyday styling.
+                </p>
+              </div>
             </div>
 
+            {/* Compact benefits */}
             <div>
-              {REASONS.map((reason, index) => (
-                <ReasonRow
-                  key={reason.eyebrow}
-                  reason={reason}
+              {REASONS.map((item, index) => (
+                <QualityItem
+                  key={item.number}
+                  item={item}
                   index={index}
                   reduceMotion={reduceMotion}
                 />
               ))}
             </div>
+
+            {/* Bottom metadata */}
+            <div className="mt-auto flex flex-col gap-4 border-t border-white/[0.09] pt-5 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="font-mono text-[8px] font-bold uppercase tracking-[0.15em] text-white/32">
+                  MODEL
+                </p>
+
+                <p className="mt-1 text-[13px] font-semibold uppercase tracking-[0.04em] text-white/72">
+                  {modelHeight} / SIZE {modelSize}
+                </p>
+              </div>
+
+              <Link
+                to={sizeGuidePath}
+                className="group inline-flex min-h-[42px] items-center justify-between gap-6 border border-white/[0.13] px-4 font-mono text-[9px] font-bold uppercase tracking-[0.12em] text-white/75 transition-all hover:border-white/60 hover:bg-white hover:text-black"
+                style={{ clipPath: BUTTON_CLIP }}
+              >
+                SIZE GUIDE
+                <Arrow />
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* FIT CHECK */}
-        <div className="mt-7 border border-white/[0.11] bg-[#080808] px-5 py-6 sm:mt-10 sm:px-7 sm:py-7 lg:px-8 lg:py-8">
-          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+        {/* =====================================================
+            COMPACT FIT CHECK
+        ===================================================== */}
+
+        <div className="mt-6 border border-white/[0.09] bg-[#070707] px-5 py-6 sm:mt-7 sm:px-7 lg:px-8">
+          <div className="grid gap-7 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
+            {/* Copy */}
             <div>
-              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-crimson sm:text-[11px]">
+              <p className="font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-crimson">
                 FIT CHECK
               </p>
-              <h3 className="mt-2 font-display text-[clamp(1.9rem,4vw,3.35rem)] font-semibold uppercase leading-[0.88] tracking-[-0.045em]">
-                PICK THE SHAPE YOU WANT.
+
+              <h3 className="mt-2 font-display text-[clamp(1.7rem,3vw,2.8rem)] font-semibold uppercase leading-[0.92] tracking-[-0.04em]">
+                CHOOSE YOUR SHAPE.
               </h3>
-              <p className="mt-3 max-w-[720px] text-[15px] leading-7 text-white/64 sm:text-[16px]">
-                Take your normal size for the intended oversized silhouette. Size down once for a cleaner relaxed fit. Size up only when you want extra volume through the body and sleeve.
+
+              <p className="mt-2 max-w-[410px] text-[13px] leading-6 text-white/44 sm:text-[14px]">
+                Normal size gives the intended oversized fit.
               </p>
             </div>
 
-            <div className="border-l-0 border-white/[0.12] pt-1 lg:border-l lg:pl-7">
-              <p className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-white/45">
-                MODEL REFERENCE
-              </p>
-              <p className="mt-2 text-[16px] font-semibold uppercase tracking-[0.04em] text-[#F4F0E8]">
-                {modelHeight} / WEARING {modelSize}
-              </p>
+            {/* Fit scale */}
+            <div>
+              <div className="relative px-2 sm:px-6">
+                <span className="absolute left-[16.5%] right-[16.5%] top-[6px] h-px bg-white/[0.12]" />
+
+                <div className="relative grid grid-cols-3 gap-2">
+                  <FitOption
+                    label="SIZE DOWN"
+                    caption="Relaxed"
+                  />
+
+                  <FitOption
+                    label="NORMAL SIZE"
+                    caption="Oversized"
+                    active
+                  />
+
+                  <FitOption
+                    label="SIZE UP"
+                    caption="Extra loose"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="relative mt-8 px-1 sm:px-6">
-            <span className="absolute left-[16.5%] right-[16.5%] top-[9px] h-px bg-white/[0.18]" />
-            <div className="relative grid grid-cols-3 gap-2">
-              <FitChoice title="SIZE DOWN" body="Cleaner relaxed fit" />
-              <FitChoice title="YOUR NORMAL SIZE" body="INTENDED OVERSIZED" active />
-              <FitChoice title="SIZE UP" body="Extra volume" />
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-col gap-3 border-t border-white/[0.11] pt-5 sm:flex-row sm:items-center sm:justify-between">
+          {/* Footer */}
+          <div className="mt-7 flex flex-col gap-4 border-t border-white/[0.08] pt-5 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap gap-x-5 gap-y-2">
               {TRUST_POINTS.map((point) => (
                 <span
                   key={point}
-                  className="inline-flex items-center gap-2 font-mono text-[9px] font-bold uppercase tracking-[0.11em] text-white/52 sm:text-[10px]"
+                  className="inline-flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[0.12em] text-white/38 sm:text-[9px]"
                 >
-                  <span className="h-1.5 w-1.5 bg-crimson" />
+                  <span className="h-1 w-1 bg-crimson" />
                   {point}
                 </span>
               ))}
             </div>
 
-            <div className="flex flex-col gap-2 sm:flex-row">
-              <Link
-                to={sizeGuidePath}
-                className="group inline-flex min-h-[44px] items-center justify-between gap-5 border border-white/[0.16] px-4 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-[#F4F0E8] transition-colors hover:border-[#F4F0E8] hover:bg-[#F4F0E8] hover:text-[#050505] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crimson"
-                style={{ clipPath: CTA_CLIP }}
-              >
-                VIEW SIZE GUIDE
-                <Arrow />
-              </Link>
-
-              <Link
-                to={shopPath}
-                className="group inline-flex min-h-[44px] items-center justify-between gap-5 bg-crimson px-4 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#F4F0E8] hover:text-[#050505] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F4F0E8]"
-                style={{ clipPath: CTA_CLIP }}
-              >
-                SHOP THE DROP
-                <Arrow />
-              </Link>
-            </div>
+            <Link
+              to={shopPath}
+              className="group inline-flex min-h-[42px] items-center justify-between gap-7 bg-crimson px-5 font-mono text-[9px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#F4F0E8] hover:text-[#050505]"
+              style={{ clipPath: BUTTON_CLIP }}
+            >
+              SHOP THE DROP
+              <Arrow />
+            </Link>
           </div>
         </div>
       </div>

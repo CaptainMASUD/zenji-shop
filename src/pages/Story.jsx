@@ -11,6 +11,10 @@ const HERO_IMAGE =
 
 const PEOPLE_IMAGE =
   'https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788784082/ChatGPT_Image_Sep_7_2026_06_27_56_PM_ygzvrl.png';
+
+const ABOUT_IMAGE =
+  'https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788789154/ChatGPT_Image_Sep_7_2026_07_52_14_PM_cscksd.png';
+
 const INFLUENCE_IMAGE =
   'https://res.cloudinary.com/dwj5oqpqz/image/upload/v1788683542/ChatGPT_Image_Sep_6_2026_02_31_57_PM_mln7v9.png';
 
@@ -116,12 +120,26 @@ export default function Story() {
       {/* ORIGIN / STORY SPINE */}
       <section className="relative border-b border-white/[0.1] bg-[#080808] py-14 sm:py-16 lg:py-20">
         <div className="site-container">
-          <div className="grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:gap-16">
-            <div>
+          <div className="grid gap-10 lg:grid-cols-[.62fr_1.38fr] lg:gap-16 xl:gap-20">
+            <div className="lg:pr-2">
               <Label>ORIGIN / WHY ZENJI</Label>
-              <Reveal className="mt-5 max-w-[420px]">
-                <p className="font-display text-[clamp(1.65rem,2.8vw,2.8rem)] font-semibold uppercase leading-[1] tracking-[-0.04em] text-white/90">
-                  A STREETWEAR LABEL BUILT AROUND STORY, SYMBOL AND SELF-EXPRESSION.
+
+              <Reveal className="mt-6 max-w-[470px]">
+                <div className="relative">
+                  <h2 className="font-display text-[clamp(2rem,3.2vw,3.5rem)] font-semibold uppercase leading-[0.88] tracking-[-0.055em] text-white/94">
+                    STREETWEAR
+                    <br />
+                    BUILT AROUND
+                    <br />
+                    <span className="text-crimson">STORY.</span>
+                  </h2>
+
+                </div>
+              </Reveal>
+
+              <Reveal className="mt-5 max-w-[430px]" delay={0.06}>
+                <p className="font-mono text-[9px] font-bold uppercase leading-6 tracking-[0.18em] text-white/42 sm:text-[10px]">
+                  SYMBOL / IDENTITY / SELF-EXPRESSION
                 </p>
               </Reveal>
             </div>
@@ -170,8 +188,9 @@ export default function Story() {
         <div className="site-container">
           <div className="grid gap-6 border-b border-black/15 pb-6 md:grid-cols-[.72fr_1.28fr] md:items-end md:gap-10">
             <Label dark>WHO WE DESIGN FOR</Label>
-            <p className="max-w-xl text-[15px] leading-7 text-black/58 sm:text-[16px] md:justify-self-end md:text-right">
-              For people building a future on their own terms — not waiting for one to be handed to them.
+            <p className="text-[13px] leading-6 text-black/56 sm:text-[14px] md:justify-self-end md:whitespace-nowrap md:text-right lg:text-[15px]">
+              <span className="md:hidden">For people choosing their own path.</span>
+              <span className="hidden md:inline">For people building their future on their own terms.</span>
             </p>
           </div>
 
@@ -249,21 +268,83 @@ export default function Story() {
       </section>
 
       {/* ABOUT / INFORMATION INDEX */}
-      <section className="border-b border-black/15 bg-[#F4F0E8] py-14 text-[#050505] sm:py-16 lg:py-20">
-        <div className="site-container">
-          <div className="grid gap-8 lg:grid-cols-[.62fr_1.38fr] lg:gap-16">
-            <div>
+      <section className="relative overflow-hidden border-b border-black/15 bg-[#F4F0E8] py-14 text-[#050505] sm:py-16 lg:py-20">
+        {/* restrained crimson ambience so this section feels distinct from WHO WE DESIGN FOR */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-24 top-8 h-72 w-72 rounded-full bg-crimson/[0.07] blur-3xl sm:h-96 sm:w-96"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-20 bottom-0 h-64 w-64 rounded-full bg-crimson/[0.035] blur-3xl sm:h-80 sm:w-80"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 top-0 h-[3px] w-[24%] bg-crimson/70 sm:w-[18%]"
+        />
+
+        <div className="site-container relative z-10">
+          <div className="grid gap-8 lg:grid-cols-[.72fr_1.28fr] lg:items-start lg:gap-12 xl:grid-cols-[.76fr_1.24fr] xl:gap-14">
+            <div className="lg:sticky lg:top-24 lg:self-start">
               <Label dark>ABOUT ZENJI</Label>
-              <Reveal className="mt-5">
-                <p className="max-w-sm font-display text-[clamp(1.9rem,3.4vw,3.4rem)] font-semibold uppercase leading-[0.98] tracking-[-0.045em]">
-                  THE BRAND,
-                  <br />
-                  AT A GLANCE.
-                </p>
+
+              <Reveal className="mt-5 sm:mt-6">
+                <motion.figure
+                  initial={
+                    reduceMotion
+                      ? false
+                      : { opacity: 0, clipPath: 'inset(0 0 10% 0)' }
+                  }
+                  whileInView={
+                    reduceMotion
+                      ? undefined
+                      : { opacity: 1, clipPath: 'inset(0 0 0% 0)' }
+                  }
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, ease: EASE }}
+                  className="relative h-[340px] w-full overflow-hidden border border-crimson/20 bg-[#090909] shadow-[0_20px_60px_rgba(197,35,48,0.12)] sm:h-[390px] lg:h-[440px] xl:h-[460px]"
+                  style={{
+                    clipPath:
+                      'polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px))',
+                  }}
+                >
+                  <motion.img
+                    src={ABOUT_IMAGE}
+                    alt="ZENJI brand identity"
+                    loading="lazy"
+                    decoding="async"
+                    initial={reduceMotion ? false : { scale: 1.035 }}
+                    whileInView={reduceMotion ? undefined : { scale: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 1.1, ease: EASE }}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 bg-crimson/[0.025]"
+                  />
+
+                  <motion.span
+                    aria-hidden="true"
+                    initial={reduceMotion ? false : { scaleY: 0 }}
+                    whileInView={reduceMotion ? undefined : { scaleY: 1 }}
+                    viewport={{ once: true, amount: 0.4 }}
+                    transition={{ duration: 0.85, delay: 0.08, ease: EASE }}
+                    className="absolute left-0 top-0 h-[30%] w-[4px] origin-top bg-crimson"
+                  />
+
+                  <div className="absolute inset-x-0 bottom-0 flex items-center justify-between border-t border-crimson/25 bg-black/72 px-4 py-3 backdrop-blur-sm">
+                    <span className="font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-white/58 sm:text-[9px]">
+                      BRAND IDENTITY
+                    </span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-crimson" />
+                  </div>
+                </motion.figure>
               </Reveal>
             </div>
 
-            <div className="border-t border-black/15">
+            <div className="border-t border-crimson/20">
               {ABOUT_ROWS.map(([label, value], index) => (
                 <motion.div
                   key={label}
@@ -271,9 +352,9 @@ export default function Story() {
                   whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.65 }}
                   transition={{ duration: 0.5, delay: Math.min(index * 0.035, 0.18), ease: EASE }}
-                  className="grid gap-2 border-b border-black/15 py-5 sm:grid-cols-[180px_1fr] sm:gap-8 sm:py-6"
+                  className="group grid gap-2 border-b border-black/15 py-5 transition-colors duration-300 hover:bg-crimson/[0.035] sm:grid-cols-[180px_1fr] sm:gap-8 sm:px-3 sm:py-6"
                 >
-                  <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-black/44">
+                  <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-black/44 transition-colors duration-300 group-hover:text-crimson">
                     {label}
                   </p>
                   <p className="max-w-[760px] text-[15px] leading-7 text-black/70 sm:text-[16px]">

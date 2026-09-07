@@ -335,7 +335,7 @@ export default function ShikigamiChatbot() {
               inset-x-2
               bottom-2
               top-16
-              z-[100]
+              z-[9990]
               flex
               flex-col
               overflow-hidden
@@ -735,7 +735,7 @@ export default function ShikigamiChatbot() {
               fixed
               bottom-4
               right-4
-              z-[99]
+              z-[9989]
 
               sm:bottom-5
               sm:right-5

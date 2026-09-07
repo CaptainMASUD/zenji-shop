@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;600;800&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,6 +9,11 @@
   font-family: "Instrument Sans", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+}
+
+/* Normal paragraph text across the entire UI uses Google Font Nunito */
+p:not(.font-display):not(.display-tight):not(.eyebrow):not(.font-mono):not(.font-jp) {
+  font-family: "Nunito", sans-serif;
 }
 * {
   box-sizing: border-box;

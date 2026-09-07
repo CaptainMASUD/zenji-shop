@@ -29,6 +29,8 @@ import OrderDetails from "./pages/account/OrderDetails.jsx";
 import Profile from "./pages/account/Profile.jsx";
 import Addresses from "./pages/account/Addresses.jsx";
 import RecentlyViewed from "./pages/account/RecentlyViewed.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import TermsConditions from "./pages/TermsConditions.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 function Shell() {
@@ -50,6 +52,10 @@ function Shell() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsConditions />} />
+          <Route path="/terms-and-conditions" element={<TermsConditions />} />
           <Route
             path="/order-success/:id"
             element={
