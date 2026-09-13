@@ -10,18 +10,18 @@
     "test": "node --test tests/*.test.js"
   },
   "dependencies": {
-    "@hugeicons/core-free-icons": "latest",
-    "@hugeicons/react": "latest",
-    "framer-motion": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-router-dom": "latest"
+    "@hugeicons/core-free-icons": "^4.3.0",
+    "@hugeicons/react": "^1.1.10",
+    "framer-motion": "^13.1.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.3"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "latest",
-    "autoprefixer": "latest",
-    "postcss": "latest",
+    "@vitejs/plugin-react": "^6.1.1",
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.26",
     "tailwindcss": "^3.4.17",
-    "vite": "latest"
+    "vite": "^8.2.2"
   }
 }

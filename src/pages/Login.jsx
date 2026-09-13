@@ -43,6 +43,8 @@ export default function Login() {
           <label className="mt-8 block">
             <span className="eyebrow">Email</span>
             <input
+              required
+              maxLength={100}
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               type="email"
@@ -52,6 +54,8 @@ export default function Login() {
           <label className="mt-5 block">
             <span className="eyebrow">Password</span>
             <input
+              required
+              maxLength={100}
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
               type="password"

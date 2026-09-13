@@ -630,6 +630,7 @@ function ReviewsSection({ reviews, onSubmit }) {
                   value={name}
                   onChange={(event) => setName(event.target.value)}
                   autoComplete="name"
+                  maxLength={50}
                   placeholder="Your name"
                   className={inputClass}
                 />
@@ -640,6 +641,7 @@ function ReviewsSection({ reviews, onSubmit }) {
                 <input
                   value={title}
                   onChange={(event) => setTitle(event.target.value)}
+                  maxLength={100}
                   placeholder="How did the piece feel?"
                   className={inputClass}
                 />
@@ -651,6 +653,7 @@ function ReviewsSection({ reviews, onSubmit }) {
               <textarea
                 value={body}
                 onChange={(event) => setBody(event.target.value)}
+                maxLength={1000}
                 rows={5}
                 placeholder="Tell others about the fit, fabric, print quality and how it wears."
                 className={`${inputClass} resize-y py-3.5 leading-6`}

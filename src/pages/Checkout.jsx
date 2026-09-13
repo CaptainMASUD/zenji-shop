@@ -49,11 +49,12 @@ export default function Checkout() {
     clearCart();
     nav(`/order-success/${order.id}`);
   };
-  const input = (key, label, type = "text") => (
+  const input = (key, label, type = "text", maxLength = 100) => (
     <label className="block">
       <span className="eyebrow">{label}</span>
       <input
         required
+        maxLength={maxLength}
         value={form[key]}
         onChange={(e) => setForm({ ...form, [key]: e.target.value })}
         type={type}
@@ -91,11 +92,14 @@ export default function Checkout() {
           </h1>
           {step === 1 && (
             <div className="mt-8 grid gap-5 sm:grid-cols-2">
-              {input("fullName", "Full name")}{" "}
-              {input("email", "Email", "email")} {input("phone", "Phone")}{" "}
-              {input("address", "Address")} {input("city", "City")}{" "}
-              {input("region", "Region / State")}{" "}
-              {input("postalCode", "Postal code")} {input("country", "Country")}
+              {input("fullName", "Full name", "text", 60)}{" "}
+              {input("email", "Email", "email", 100)}{" "}
+              {input("phone", "Phone", "tel", 25)}{" "}
+              {input("address", "Address", "text", 120)}{" "}
+              {input("city", "City", "text", 50)}{" "}
+              {input("region", "Region / State", "text", 50)}{" "}
+              {input("postalCode", "Postal code", "text", 15)}{" "}
+              {input("country", "Country", "text", 50)}
             </div>
           )}
           {step === 2 && (
@@ -186,6 +190,7 @@ export default function Checkout() {
               <Link
                 to="/terms"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-silver underline hover:text-ivory"
               >
                 Terms & Conditions
@@ -194,6 +199,7 @@ export default function Checkout() {
               <Link
                 to="/privacy"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-silver underline hover:text-ivory"
               >
                 Privacy Policy

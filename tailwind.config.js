@@ -16,8 +16,7 @@ export default {
         sans: ['"Instrument Sans"', 'sans-serif'],
         mono: ['"Geist Mono"', 'monospace'],
         jp: ['"Noto Sans JP"', 'sans-serif'],
-        nunito: ['"Nunito"', 'sans-serif'],
-        body: ['"Nunito"', 'sans-serif'],
+        body: ['"Instrument Sans"', 'sans-serif'],
       },
       screens: {
         '3xl': '1920px',

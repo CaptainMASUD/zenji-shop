@@ -28,10 +28,12 @@ export default function Register() {
     register(form);
     nav("/account");
   };
-  const field = (key, label, type = "text") => (
+  const field = (key, label, type = "text", maxLength = 100) => (
     <label className="block">
       <span className="eyebrow">{label}</span>
       <input
+        required={key !== "phone"}
+        maxLength={maxLength}
         value={form[key]}
         onChange={(e) => setForm({ ...form, [key]: e.target.value })}
         type={type}
@@ -52,12 +54,12 @@ export default function Register() {
         </p>
         {error && <p className="mt-4 text-sm text-crimson">{error}</p>}
         <div className="mt-8 grid gap-6 sm:grid-cols-2">
-          {field("name", "Full name")}
-          {field("email", "Email", "email")}
-          {field("phone", "Phone")}
-          {field("password", "Password", "password")}
+          {field("name", "Full name", "text", 60)}
+          {field("email", "Email", "email", 100)}
+          {field("phone", "Phone", "tel", 25)}
+          {field("password", "Password", "password", 100)}
           <div className="sm:col-span-2">
-            {field("confirm", "Confirm password", "password")}
+            {field("confirm", "Confirm password", "password", 100)}
           </div>
         </div>
         <Button type="submit" className="mt-8 w-full">
@@ -68,6 +70,7 @@ export default function Register() {
           <Link
             to="/privacy"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-silver underline hover:text-ivory"
           >
             Privacy Policy
@@ -76,6 +79,7 @@ export default function Register() {
           <Link
             to="/terms"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-silver underline hover:text-ivory"
           >
             Terms & Conditions
