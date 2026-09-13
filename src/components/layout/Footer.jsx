@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 
 const exploreLinks = [
@@ -314,7 +315,7 @@ export default function Footer() {
           className="
             translate-y-6
             whitespace-nowrap
-            text-[clamp(7rem,20vw,20rem)]
+            text-[clamp(6.4rem,18vw,18rem)]
             font-medium
             uppercase
             leading-none
@@ -358,7 +359,7 @@ export default function Footer() {
             >
               <p
                 className="
-                  text-[clamp(4.2rem,8vw,7.8rem)]
+                  text-[clamp(3.9rem,7.2vw,7rem)]
                   font-medium
                   uppercase
                   leading-[0.82]
@@ -697,3 +698,4 @@ export default function Footer() {
     </footer>
   );
 }
+
