@@ -314,14 +314,17 @@ export default function Footer() {
           className="
             translate-y-6
             whitespace-nowrap
-            font-display
             text-[clamp(7rem,20vw,20rem)]
-            font-bold
+            font-medium
             uppercase
             leading-none
-            tracking-[-0.09em]
+            tracking-[-0.055em]
             text-white/[0.022]
           "
+          style={{
+            fontFamily: '"Helvetica Neue", "Segoe UI", Arial, sans-serif',
+            fontWeight: 500,
+          }}
         >
           ZENJI
         </span>
@@ -356,15 +359,15 @@ export default function Footer() {
               <p
                 className="
                   text-[clamp(4.2rem,8vw,7.8rem)]
-                  font-black
+                  font-medium
                   uppercase
-                  leading-[0.78]
-                  tracking-[-0.075em]
+                  leading-[0.82]
+                  tracking-[-0.05em]
                   text-[#F4F0E8]
                 "
                 style={{
-                  fontFamily:
-                    '"Arial Black", "Helvetica Neue", Arial, sans-serif',
+                  fontFamily: '"Helvetica Neue", "Segoe UI", Arial, sans-serif',
+                  fontWeight: 500,
                 }}
               >
                 ZENJI
@@ -434,7 +437,10 @@ export default function Footer() {
 
             <div className="flex flex-col items-start gap-3.5">
               {exploreLinks.map(([to, label]) => (
-                <FooterLink key={to} to={to}>
+                <FooterLink
+                  key={to}
+                  to={to}
+                >
                   {label}
                 </FooterLink>
               ))}
@@ -459,7 +465,10 @@ export default function Footer() {
 
             <div className="flex flex-col items-start gap-3.5">
               {accountLinks.map(([to, label]) => (
-                <FooterLink key={to} to={to}>
+                <FooterLink
+                  key={to}
+                  to={to}
+                >
                   {label}
                 </FooterLink>
               ))}
