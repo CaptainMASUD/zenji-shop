@@ -355,14 +355,17 @@ export default function Footer() {
             >
               <p
                 className="
-                  font-display
                   text-[clamp(4.2rem,8vw,7.8rem)]
-                  font-bold
+                  font-black
                   uppercase
                   leading-[0.78]
                   tracking-[-0.075em]
                   text-[#F4F0E8]
                 "
+                style={{
+                  fontFamily:
+                    '"Arial Black", "Helvetica Neue", Arial, sans-serif',
+                }}
               >
                 ZENJI
                 <span className="text-crimson">.</span>
@@ -431,10 +434,7 @@ export default function Footer() {
 
             <div className="flex flex-col items-start gap-3.5">
               {exploreLinks.map(([to, label]) => (
-                <FooterLink
-                  key={to}
-                  to={to}
-                >
+                <FooterLink key={to} to={to}>
                   {label}
                 </FooterLink>
               ))}
@@ -459,10 +459,7 @@ export default function Footer() {
 
             <div className="flex flex-col items-start gap-3.5">
               {accountLinks.map(([to, label]) => (
-                <FooterLink
-                  key={to}
-                  to={to}
-                >
+                <FooterLink key={to} to={to}>
                   {label}
                 </FooterLink>
               ))}

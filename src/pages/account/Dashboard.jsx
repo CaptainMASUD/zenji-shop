@@ -52,11 +52,11 @@ export default function Dashboard() {
               ACCOUNT / OVERVIEW
             </p>
           </div>
-          <h1 className="mt-3 font-display text-[clamp(2.15rem,5vw,3.8rem)] font-semibold uppercase leading-[0.9] tracking-[-0.05em]">
+          <h1 className="mt-2 font-display text-[clamp(1.75rem,5vw,3.8rem)] font-semibold uppercase leading-[0.9] tracking-[-0.05em]">
             Your account.
           </h1>
         </div>
-        <p className="max-w-sm text-[14px] leading-6 text-white/48 sm:text-right">
+        <p className="max-w-sm text-[13px] leading-5 text-white/48 sm:text-right sm:text-[14px] sm:leading-6">
           Orders, saved pieces and active deliveries in one place.
         </p>
       </div>
@@ -68,7 +68,7 @@ export default function Dashboard() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.05, ease: EASE }}
-            className={`relative px-5 py-5 sm:px-6 sm:py-6 ${
+            className={`relative px-4 py-4 sm:px-6 sm:py-6 ${
               index > 0 ? 'border-t border-white/[0.1] sm:border-l sm:border-t-0' : ''
             }`}
           >
@@ -76,8 +76,8 @@ export default function Dashboard() {
             <p className="font-mono text-[9px] font-bold uppercase tracking-[0.15em] text-white/46">
               {label}
             </p>
-            <div className="mt-4 flex items-end justify-between gap-3">
-              <p className="font-display text-4xl font-semibold leading-none tracking-[-0.05em] sm:text-5xl">
+            <div className="mt-3 flex items-end justify-between gap-3 sm:mt-4">
+              <p className="font-display text-3xl font-semibold leading-none tracking-[-0.05em] sm:text-5xl">
                 {String(value).padStart(2, '0')}
               </p>
               <span className="pb-1 font-mono text-[8px] font-bold uppercase tracking-[0.12em] text-white/35">
@@ -88,7 +88,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <section className="mt-10 sm:mt-12">
+      <section className="mt-8 sm:mt-12">
         <div className="mb-4 flex items-end justify-between gap-4 border-b border-white/[0.1] pb-4">
           <div>
             <p className="font-mono text-[9px] font-bold uppercase tracking-[0.17em] text-crimson">
@@ -117,23 +117,25 @@ export default function Dashboard() {
               >
                 <Link
                   to={`/account/orders/${order.id}`}
-                  className="group grid gap-4 border-t border-white/[0.1] py-5 transition-colors hover:bg-white/[0.02] sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:items-center sm:px-3"
+                  className="group grid gap-3 border-t border-white/[0.1] py-4 transition-colors hover:bg-white/[0.02] sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:items-center sm:gap-4 sm:px-3 sm:py-5"
                 >
                   <div className="min-w-0">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2.5">
                       <span className="h-2 w-2 shrink-0 bg-crimson" />
-                      <p className="truncate text-[14px] font-semibold uppercase tracking-[0.03em] text-[#F4F0E8]">
+                      <p className="truncate text-[13px] font-semibold uppercase tracking-[0.03em] text-[#F4F0E8] sm:text-[14px]">
                         {order.id}
                       </p>
                     </div>
-                    <p className="mt-2 pl-5 font-mono text-[9px] uppercase tracking-[0.1em] text-white/40">
+                    <p className="mt-1.5 pl-4 font-mono text-[9px] uppercase tracking-[0.1em] text-white/40">
                       {order.date} / {order.items?.length ?? 0} item{(order.items?.length ?? 0) === 1 ? '' : 's'}
                     </p>
                   </div>
-                  <StatusBadge status={order.status} />
-                  <div className="flex items-center justify-between gap-4 sm:min-w-[120px] sm:justify-end">
-                    <span className="text-[14px] font-semibold">{currency(order.total)}</span>
-                    <span className="text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-crimson">→</span>
+                  <div className="flex items-center justify-between gap-3 pt-1 sm:contents sm:pt-0">
+                    <StatusBadge status={order.status} />
+                    <div className="flex items-center gap-3 sm:min-w-[120px] sm:justify-end">
+                      <span className="text-[13px] font-semibold sm:text-[14px]">{currency(order.total)}</span>
+                      <span className="text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-crimson">→</span>
+                    </div>
                   </div>
                 </Link>
               </motion.div>

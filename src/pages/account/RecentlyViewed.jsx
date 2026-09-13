@@ -19,7 +19,7 @@ export default function RecentlyViewed() {
 
   return (
     <div className="text-[#F4F0E8]">
-      <div className="flex flex-col gap-4 border-b border-white/[0.1] pb-6 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-4 border-b border-white/[0.1] pb-5 sm:flex-row sm:items-end sm:justify-between sm:pb-6">
         <div>
           <div className="flex items-center gap-3">
             <span className="h-[3px] w-7 bg-crimson" />
@@ -27,7 +27,7 @@ export default function RecentlyViewed() {
               RECENT / SIGNALS
             </p>
           </div>
-          <h1 className="mt-3 font-display text-[clamp(2.15rem,5vw,3.7rem)] font-semibold uppercase leading-[0.9] tracking-[-0.05em]">
+          <h1 className="mt-2 font-display text-[clamp(1.75rem,5vw,3.7rem)] font-semibold uppercase leading-[0.9] tracking-[-0.05em]">
             Recently viewed.
           </h1>
         </div>
@@ -41,7 +41,7 @@ export default function RecentlyViewed() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
-          className="pt-7 sm:pt-8"
+          className="pt-5 sm:pt-8"
         >
           <ProductGrid products={list} columns="three" />
         </motion.div>

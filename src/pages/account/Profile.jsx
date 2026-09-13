@@ -24,7 +24,7 @@ export default function Profile() {
         autoComplete={autoComplete}
         value={form[key] || ''}
         onChange={(event) => setForm((current) => ({ ...current, [key]: event.target.value }))}
-        className="mt-2 min-h-[50px] w-full border border-white/[0.12] bg-[#080808] px-4 text-[14px] text-[#F4F0E8] outline-none transition-colors focus:border-crimson"
+        className="mt-2 min-h-[48px] w-full max-w-full min-w-0 border border-white/[0.12] bg-[#080808] px-4 text-[14px] text-[#F4F0E8] outline-none transition-colors focus:border-crimson sm:min-h-[50px]"
       />
     </label>
   );
@@ -38,7 +38,7 @@ export default function Profile() {
 
   return (
     <form onSubmit={save} className="text-[#F4F0E8]">
-      <div className="flex flex-col gap-4 border-b border-white/[0.1] pb-6 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-4 border-b border-white/[0.1] pb-5 sm:flex-row sm:items-end sm:justify-between sm:pb-6">
         <div>
           <div className="flex items-center gap-3">
             <span className="h-[3px] w-7 bg-crimson" />
@@ -46,11 +46,11 @@ export default function Profile() {
               PROFILE / EDIT
             </p>
           </div>
-          <h1 className="mt-3 font-display text-[clamp(2.15rem,5vw,3.7rem)] font-semibold uppercase leading-[0.9] tracking-[-0.05em]">
+          <h1 className="mt-2 font-display text-[clamp(1.75rem,5vw,3.7rem)] font-semibold uppercase leading-[0.9] tracking-[-0.05em]">
             Your identity.
           </h1>
         </div>
-        <p className="max-w-sm text-[14px] leading-6 text-white/46 sm:text-right">
+        <p className="max-w-sm text-[13px] leading-5 text-white/46 sm:text-right sm:text-[14px] sm:leading-6">
           Keep your contact details current for orders and delivery updates.
         </p>
       </div>
@@ -59,9 +59,9 @@ export default function Profile() {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE }}
-        className="border-b border-white/[0.1] py-7 sm:py-8"
+        className="border-b border-white/[0.1] py-5 sm:py-8"
       >
-        <div className="mb-6 flex items-center justify-between gap-4">
+        <div className="mb-5 flex items-center justify-between gap-4 sm:mb-6">
           <div className="flex items-center gap-3">
             <span className="h-2 w-2 bg-crimson" />
             <p className="font-mono text-[9px] font-bold uppercase tracking-[0.15em] text-crimson">
@@ -73,7 +73,7 @@ export default function Profile() {
           </span>
         </div>
 
-        <div className="grid gap-x-5 gap-y-5 sm:grid-cols-2">
+        <div className="grid gap-x-5 gap-y-4 sm:grid-cols-2 sm:gap-y-5">
           {field('name', 'Full name', 'text', 'name')}
           {field('email', 'Email', 'email', 'email')}
           {field('phone', 'Phone', 'tel', 'tel')}
@@ -81,8 +81,8 @@ export default function Profile() {
         </div>
       </motion.section>
 
-      <div className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-center sm:justify-between">
-        <Button type="submit">SAVE PROFILE</Button>
+      <div className="flex flex-col gap-4 pt-5 sm:flex-row sm:items-center sm:justify-between sm:pt-6">
+        <Button type="submit" className="w-full sm:w-auto">SAVE PROFILE</Button>
         <AnimatePresence mode="wait">
           {saved ? (
             <motion.span
